@@ -295,7 +295,7 @@ export default function Home() {
               <span className="text-2xl font-bold tracking-tight text-[#1d1d1f]">
                 <CountUp target={20} suffix="+" delay={0} duration={2500} />
               </span>
-              <span className="text-[11px] font-medium uppercase tracking-wider text-[#86868b]">
+              <span className="text-center text-[11px] font-medium uppercase tracking-wider text-[#86868b]">
                 Years HR Expertise
               </span>
             </div>
@@ -422,7 +422,7 @@ export default function Home() {
             <span className="text-4xl font-bold tracking-tight text-[#1d1d1f]">
               20<span className="text-2xl">+</span>
             </span>
-            <p className="mt-3 text-sm font-bold text-[#3B82F6]">Expertise</p>
+            <p className="mt-3 text-sm font-bold text-[#3B82F6]">Years Expertise</p>
             <p className="mt-1 text-sm font-medium leading-relaxed text-[#1d1d1f]/60">
               Screened with the rigor of a seasoned HR professional with 20+
               years of experience — not a junior recruiter following a
