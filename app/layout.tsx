@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,8 +7,13 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+});
+
 export const metadata: Metadata = {
-  title: "TalentFlux — Performance Recruiting Agency",
+  title: "Arrive Talent",
   description:
     "We fill your open roles in 72 hours. Pre-screened candidates for digital marketing agencies and SaaS companies.",
 };
@@ -20,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${syne.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

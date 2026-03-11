@@ -6,6 +6,10 @@
   --animate-step-3: step-activate 5s ease-in-out 2s infinite;
 }
 
+.font-display {
+  font-family: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);

@@ -11,7 +11,8 @@ export default function TeamPage() {
       {/* Hero */}
       <section className="bg-[#f5f5f7] px-6 pt-32 pb-0 text-center md:px-16 lg:px-24">
         <h1 className="text-4xl font-bold tracking-tight text-[#1d1d1f] md:text-5xl lg:text-6xl">
-          The People Behind TalentFlux
+          The People Behind{" "}
+          <span className="font-display font-bold">ArriveTalent</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base font-medium text-[#86868b]">
           Two founders. Twenty years of HR expertise. One obsession — finding
@@ -105,7 +106,7 @@ export default function TeamPage() {
                   resumes to job descriptions. She believes the right hire is
                   defined by cultural alignment, long-term performance potential,
                   and organizational fit — a philosophy that forms the foundation
-                  of everything TalentFlux does.
+                  of everything Arrive Talent does.
                 </p>
                 <p className="text-sm font-medium leading-relaxed text-[#86868b]">
                   Today she channels that expertise into building a recruiting
@@ -175,7 +176,7 @@ export default function TeamPage() {
             <div className="flex flex-1 flex-col">
               <div className="flex flex-col gap-4 md:mt-4">
                 <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Adyatan is the Co-Founder and COO of TalentFlux, leading all US
+                  Adyatan is the Co-Founder and COO of Arrive Talent, leading all US
                   operations, client acquisition, and the technology
                   infrastructure that powers the agency&apos;s AI-assisted
                   recruiting process. A Computer Science graduate from the
@@ -184,12 +185,12 @@ export default function TeamPage() {
                   agencies simply don&apos;t have access to.
                 </p>
                 <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Before TalentFlux, Adyatan honed that technical foundation
+                  Before Arrive Talent, Adyatan honed that technical foundation
                   across software engineering internships at Bank of America,
                   Delta Air Lines, and HiLabs — building production-level systems
                   at companies that demand precision, speed, and accountability.
                   Where most recruiting agencies still rely on manual pipelines
-                  and gut instinct, TalentFlux runs on systems built and
+                  and gut instinct, Arrive Talent runs on systems built and
                   maintained by someone who has shipped real code at Fortune 500
                   companies.
                 </p>
@@ -201,7 +202,7 @@ export default function TeamPage() {
                 </p>
                 <p className="text-sm font-medium leading-relaxed text-[#86868b]">
                   His belief is simple: recruiting is a data problem as much as a
-                  people problem. TalentFlux exists to solve both.
+                  people problem. Arrive Talent exists to solve both.
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3">

@@ -8,9 +8,9 @@ export default function Footer() {
         <div className="flex flex-col">
           <Link
             href="/"
-            className="text-2xl font-semibold tracking-tight text-white"
+            className="font-display text-2xl font-bold tracking-tight text-white"
           >
-            TalentFlux
+            ArriveTalent
           </Link>
           <p className="mt-3 max-w-xs text-sm font-medium leading-relaxed text-[#555]">
             Pre-screened candidates in 72 hours — built for Tampa Bay&apos;s
@@ -66,7 +66,7 @@ export default function Footer() {
       {/* Bottom strip */}
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-[#1a1a1a] py-6 sm:flex-row">
         <p className="text-xs font-medium text-[#333]">
-          &copy; 2025 TalentFlux. All rights reserved.
+          &copy; 2025 ArriveTalent. All rights reserved.
         </p>
         <div className="flex items-center gap-6">
           <Link

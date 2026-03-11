@@ -11,9 +11,9 @@ export default function Header() {
       <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-between bg-transparent px-6 py-6 md:px-16 lg:px-24">
         <Link
           href="/"
-          className="text-2xl font-semibold tracking-tight text-[#1d1d1f] md:text-3xl"
+          className="font-display text-2xl font-bold tracking-tight text-[#1d1d1f] md:text-3xl"
         >
-          TalentFlux
+          ArriveTalent
         </Link>
 
         {/* Desktop nav */}
@@ -132,10 +132,10 @@ export default function Header() {
 
         <div className="border-t border-white/10 px-8 py-6">
           <a
-            href="mailto:contact@talentflux.com"
+            href="mailto:contact@arrivetalent.com"
             className="text-sm font-medium text-white/40 transition-colors hover:text-white"
           >
-            contact@talentflux.com
+            contact@arrivetalent.com
           </a>
         </div>
       </nav>
