@@ -6,10 +6,46 @@ import Footer from "../components/Footer";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    if (submitting) return;
+
+    setSubmitting(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      company: String(formData.get("company") ?? "").trim(),
+      website: String(formData.get("website") ?? "").trim(),
+      role: String(formData.get("role") ?? "").trim(),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -144,8 +180,8 @@ export default function ContactPage() {
                       <input
                         id="website"
                         name="website"
-                        type="url"
-                        placeholder="https://acme.com"
+                        type="text"
+                        placeholder="acme.com"
                         className="rounded-xl border border-[#d2d2d7] bg-white px-4 py-3 text-sm font-medium text-[#1d1d1f] outline-none transition-colors placeholder:text-[#d2d2d7] focus:border-[#3B82F6]"
                       />
                     </div>
@@ -172,13 +208,19 @@ export default function ContactPage() {
                 <div className="border-t border-[#d2d2d7] px-8 py-6 md:px-10">
                   <button
                     type="submit"
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1d1d1f] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#333]"
+                    disabled={submitting}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1d1d1f] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#333] disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    Submit
+                    {submitting ? "Submitting..." : "Submit"}
                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
                       →
                     </span>
                   </button>
+                  {error && (
+                    <p className="mt-3 text-center text-xs font-semibold text-rose-600">
+                      {error}
+                    </p>
+                  )}
                   <p className="mt-3 text-center text-xs font-medium text-[#86868b]">
                     We&apos;ll get back to you within 24 hours.
                   </p>
@@ -202,7 +244,7 @@ export default function ContactPage() {
                 needs directly. No forms, no waiting — just a real conversation.
               </p>
               <a
-                href="https://calendly.com"
+                href="https://calendly.com/hire-arrivetalent/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#3B82F6] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#2563EB]"
