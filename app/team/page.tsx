@@ -69,7 +69,7 @@ export default function TeamPage() {
             <div className="flex shrink-0 flex-col items-start">
               <div className="h-56 w-56 overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/neelam.jpg"
+                  src="/images/Neelam.jpeg"
                   alt="Neelam Sanjiv"
                   width={224}
                   height={224}
