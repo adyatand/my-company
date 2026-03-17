@@ -31,13 +31,13 @@ export default function TeamPage() {
             >
               {[...Array(2)].map((_, setIndex) =>
                 [
+                  { src: "/logos/legajoist-logo.png", alt: "Legajoist" },
+                  { src: "/logos/HiLabs_logo.png", alt: "HiLabs" },
+                  { src: "/logos/Marion-Biotech-logo.png", alt: "Marion Biotech" },
+                  { src: "/logos/Shalimar_Paints_New_Logo.png", alt: "Shalimar Paints" },
+                  { src: "/logos/ruptok_fintech_logo.png", alt: "Ruptok Fintech" },
                   { src: "/logos/bank-of-america-logo.png", alt: "Bank of America" },
                   { src: "/logos/Delta-Air-Lines-Logo.png", alt: "Delta Air Lines" },
-                  { src: "/logos/ruptok_fintech_logo.png", alt: "Ruptok Fintech" },
-                  { src: "/logos/Shalimar_Paints_New_Logo.png", alt: "Shalimar Paints" },
-                  { src: "/logos/Marion-Biotech-logo.png", alt: "Marion Biotech" },
-                  { src: "/logos/HiLabs_logo.png", alt: "HiLabs" },
-                  { src: "/logos/legajoist-logo.png", alt: "Legajoist" },
                 ].map((logo) => (
                   <div
                     key={`${setIndex}-${logo.alt}`}
@@ -61,186 +61,134 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Team members */}
+      {/* Two-column layout: Founder & Tampa Bay */}
       <section className="px-6 py-16 md:px-16 lg:px-24">
-        <div className="mx-auto flex max-w-5xl flex-col gap-16">
-          {/* Founder — image left, description right */}
-          <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
-            <div className="flex shrink-0 flex-col items-center">
-              <div className="h-48 w-48 overflow-hidden rounded-2xl">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2">
+          {/* Left Column — Founder & CEO */}
+          <div className="flex flex-col">
+            <div className="flex shrink-0 flex-col items-start">
+              <div className="h-56 w-56 overflow-hidden rounded-2xl">
                 <Image
                   src="/images/neelam.jpg"
                   alt="Neelam Sanjiv"
-                  width={192}
-                  height={192}
+                  width={224}
+                  height={224}
                   className="h-full w-full object-cover"
                 />
               </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.15em] text-[#3B82F6]">
-                Founder &amp; CEO
-              </p>
-              <h3 className="mt-1 text-xl font-bold tracking-tight text-[#1d1d1f]">
+              <h3 className="mt-4 text-2xl font-bold tracking-tight text-[#1d1d1f]">
                 Neelam Sanjiv
               </h3>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-[#3B82F6]">
+                Founder &amp; CEO
+              </p>
             </div>
-            <div className="flex flex-1 flex-col">
-              <div className="flex flex-col gap-4 md:mt-4">
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Neelam brings over two decades of HR leadership experience
-                  spanning recruitment, organizational development, and strategic
-                  people operations across some of India&apos;s most dynamic
-                  companies.
-                </p>
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Her career includes serving as Vice President of HR at Ruptok
-                  Fintech, where she led talent acquisition and organizational
-                  growth initiatives, and over five years as an HR Consultant at
-                  Legajoist Solutions, where she built and scaled hiring processes
-                  for growing businesses. Earlier in her career she held senior
-                  marketing and communications leadership roles at Marion Biotech
-                  and Shalimar Paints, giving her a rare cross-functional
-                  perspective that most HR professionals simply don&apos;t have.
-                </p>
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Neelam&apos;s approach to recruitment goes beyond matching
-                  resumes to job descriptions. She believes the right hire is
-                  defined by cultural alignment, long-term performance potential,
-                  and organizational fit — a philosophy that forms the foundation
-                  of everything Arrive Talent does.
-                </p>
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Today she channels that expertise into building a recruiting
-                  agency that brings Fortune-500-level HR rigor to fast-growing
-                  digital marketing agencies and SaaS companies — at a fraction of
-                  the cost and a fraction of the time.
-                </p>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a
-                  href="https://www.linkedin.com/in/neelam-sanjiv-857980a/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d2d2d7] bg-white px-5 py-2 text-xs font-semibold text-[#1d1d1f] transition-all duration-300 hover:border-[#3B82F6] hover:text-[#3B82F6]"
+            <div className="mt-6 flex flex-col gap-4">
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                Neelam brings over two decades of HR leadership experience
+                spanning recruitment, organizational development, and strategic
+                people operations across some of India&apos;s most dynamic
+                companies.
+              </p>
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                Her career includes serving as Vice President of HR at Ruptok
+                Fintech, where she led talent acquisition and organizational
+                growth initiatives, and over five years as an HR Consultant at
+                Legajoist Solutions, where she built and scaled hiring processes
+                for growing businesses. Earlier in her career she held senior
+                marketing and communications leadership roles at Marion Biotech
+                and Shalimar Paints, giving her a rare cross-functional
+                perspective that most HR professionals simply don&apos;t have.
+              </p>
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                Neelam&apos;s approach to recruitment goes beyond matching
+                resumes to job descriptions. She believes the right hire is
+                defined by cultural alignment, long-term performance potential,
+                and organizational fit — a philosophy that forms the foundation
+                of everything ArriveTalent does.
+              </p>
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                Today she channels that expertise into building a recruiting
+                agency that brings Fortune-500-level HR rigor to fast-growing
+                digital marketing agencies and SaaS companies — at a fraction of
+                the cost and a fraction of the time.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="https://www.linkedin.com/in/neelam-sanjiv-857980a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#d2d2d7] bg-white px-5 py-2 text-xs font-semibold text-[#1d1d1f] transition-all duration-300 hover:border-[#3B82F6] hover:text-[#3B82F6]"
+              >
+                <svg
+                  className="h-3.5 w-3.5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    className="h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  Connect on LinkedIn
-                </a>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d2d2d7] bg-white px-5 py-2 text-xs font-semibold text-[#1d1d1f] transition-all duration-300 hover:border-[#3B82F6] hover:text-[#3B82F6]"
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                Connect on LinkedIn
+              </a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-[#d2d2d7] bg-white px-5 py-2 text-xs font-semibold text-[#1d1d1f] transition-all duration-300 hover:border-[#3B82F6] hover:text-[#3B82F6]"
+              >
+                <svg
+                  className="h-3.5 w-3.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
                 >
-                  <svg
-                    className="h-3.5 w-3.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Send a Message
-                </Link>
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                Send a Message
+              </Link>
             </div>
           </div>
 
-          {/* Co-Founder — description left, image right */}
-          <div className="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start md:gap-12">
-            <div className="flex shrink-0 flex-col items-center">
-              <div className="h-48 w-48 overflow-hidden rounded-2xl">
+          {/* Right Column — Tampa Bay Operations */}
+          <div className="flex flex-col">
+            <div className="flex shrink-0 flex-col items-start">
+              <div className="h-56 w-full overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/adyatan.jpg"
-                  alt="Adyatan Dagar"
-                  width={192}
-                  height={192}
+                  src="/images/tampa.png"
+                  alt="Tampa Bay, Florida"
+                  width={448}
+                  height={224}
                   className="h-full w-full object-cover"
                 />
               </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.15em] text-violet-600">
-                Co-Founder &amp; COO
+              <p className="mt-4 text-lg font-bold tracking-tight text-[#1d1d1f]">
+                Tampa Bay, Florida
               </p>
-              <h3 className="mt-1 text-xl font-bold tracking-tight text-[#1d1d1f]">
-                Adyatan Dagar
-              </h3>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-[#3B82F6]">
+                Client Partnerships &amp; Business Development
+              </p>
             </div>
-            <div className="flex flex-1 flex-col">
-              <div className="flex flex-col gap-4 md:mt-4">
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Adyatan is the Co-Founder and COO of Arrive Talent, leading all US
-                  operations, client acquisition, and the technology
-                  infrastructure that powers the agency&apos;s AI-assisted
-                  recruiting process. A Computer Science graduate from the
-                  University of South Florida, he brings a rare combination of
-                  technical depth and business instinct that most recruiting
-                  agencies simply don&apos;t have access to.
-                </p>
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Before Arrive Talent, Adyatan honed that technical foundation
-                  across software engineering internships at Bank of America,
-                  Delta Air Lines, and HiLabs — building production-level systems
-                  at companies that demand precision, speed, and accountability.
-                  Where most recruiting agencies still rely on manual pipelines
-                  and gut instinct, Arrive Talent runs on systems built and
-                  maintained by someone who has shipped real code at Fortune 500
-                  companies.
-                </p>
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  Born in India and educated in the United States, Adyatan bridges
-                  both worlds — understanding the ambition of growing companies
-                  expanding into the US market, and the expectations of American
-                  talent they need to attract.
-                </p>
-                <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                  His belief is simple: recruiting is a data problem as much as a
-                  people problem. Arrive Talent exists to solve both.
-                </p>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a
-                  href="https://www.linkedin.com/in/adyatan-dagar/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d2d2d7] bg-white px-5 py-2 text-xs font-semibold text-[#1d1d1f] transition-all duration-300 hover:border-violet-600 hover:text-violet-600"
-                >
-                  <svg
-                    className="h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  Connect on LinkedIn
-                </a>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d2d2d7] bg-white px-5 py-2 text-xs font-semibold text-[#1d1d1f] transition-all duration-300 hover:border-violet-600 hover:text-violet-600"
-                >
-                  <svg
-                    className="h-3.5 w-3.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Send a Message
-                </Link>
-              </div>
+            <div className="mt-6 flex flex-col gap-4">
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                ArriveTalent&apos;s Tampa Bay presence means our clients
+                aren&apos;t just working with a remote agency — they&apos;re
+                working with someone embedded in the same market, attending the
+                same events, and building relationships inside the same business
+                community.
+              </p>
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                Our local team handles everything on the client side: understanding
+                your hiring needs, managing the search process, coordinating
+                interviews, and staying with you through offer and onboarding.
+              </p>
+              <p className="text-sm font-medium leading-relaxed text-[#86868b]">
+                We work exclusively with digital marketing agencies and SaaS
+                companies in the Tampa Bay area — which means we know your market,
+                your roles, and the kind of people who thrive in your environment.
+              </p>
             </div>
           </div>
         </div>

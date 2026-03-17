@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Arrive Talent",
   description:
     "We fill your open roles in 72 hours. Pre-screened candidates for digital marketing agencies and SaaS companies.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
