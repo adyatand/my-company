@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -177,8 +178,14 @@ export default function Home() {
             {/* Card 1 */}
             <div className="absolute top-0 right-4 left-0 animate-[fadeSlideUp_0.8s_ease-out_0.2s_both] rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-lg">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#3B82F6]/10 text-sm font-bold text-[#3B82F6]">
-                  SR
+                <div className="h-10 w-10 overflow-hidden rounded-full bg-[#f5f5f7]">
+                  <Image
+                    src="/cards/sarah.png"
+                    alt="Sarah R."
+                    width={40}
+                    height={40}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#1d1d1f]">Sarah R.</p>
@@ -214,8 +221,14 @@ export default function Home() {
             {/* Card 2 */}
             <div className="absolute top-[175px] right-0 left-6 animate-[fadeSlideUp_0.8s_ease-out_0.5s_both] rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-lg">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-500/10 text-sm font-bold text-violet-600">
-                  JM
+                <div className="h-10 w-10 overflow-hidden rounded-full bg-[#f5f5f7]">
+                  <Image
+                    src="/cards/james.png"
+                    alt="James M."
+                    width={40}
+                    height={40}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#1d1d1f]">James M.</p>
@@ -251,8 +264,14 @@ export default function Home() {
             {/* Card 3 */}
             <div className="absolute top-[350px] right-3 left-2 animate-[fadeSlideUp_0.8s_ease-out_0.8s_both] rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-lg">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500/10 text-sm font-bold text-amber-600">
-                  KP
+                <div className="h-10 w-10 overflow-hidden rounded-full bg-[#f5f5f7]">
+                  <Image
+                    src="/cards/karen.png"
+                    alt="Karen P."
+                    width={40}
+                    height={40}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#1d1d1f]">Karen P.</p>
