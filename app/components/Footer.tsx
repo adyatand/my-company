@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -8,13 +9,20 @@ export default function Footer() {
         <div className="flex flex-col">
           <Link
             href="/"
-            className="font-display text-2xl font-bold tracking-tight text-white"
+            className="flex items-center gap-0 font-display text-2xl font-bold tracking-tight text-white"
           >
+            <Image
+              src="/logos/AT_New_Logo_Trans_BG.png"
+              alt="ArriveTalent logo"
+              width={64}
+              height={64}
+              className="-ml-3 m-0 block h-16 w-16 shrink-0 p-0 object-contain brightness-0 invert"
+            />
             ArriveTalent
           </Link>
           <p className="mt-3 max-w-xs text-sm font-medium leading-relaxed text-[#555]">
-            Pre-screened candidates in 72 hours — built for Tampa Bay&apos;s
-            digital agencies and SaaS teams.
+            Top-tier talent for Tampa Bay&apos;s digital agencies and SaaS
+            teams.
           </p>
 
           <p className="mt-8 text-xs font-medium text-[#555]">Follow us on:</p>

@@ -136,12 +136,10 @@ export default function Home() {
         <div className="flex flex-1 flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16">
           {/* Left — copy */}
           <div className="flex flex-1 flex-col items-start justify-center">
-            <h1 className="max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-[3.5rem]">
-              <span className="text-[#3B82F6]">Pre-screened</span> qualified
-              candidates
-              <br />
-              delivered to you in{" "}
-              <span className="text-[#3B82F6]">72&nbsp;hours</span>.
+            <h1 className="max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-[3rem]">
+              Stop sorting resumes. Meet <span className="text-[#3B82F6]">top-tier</span>, pre-screened candidates{" "}
+              <br className="md:hidden" />
+              <span className="text-[#3B82F6]">ready to interview</span>
             </h1>
 
             <div className="mt-8 h-px w-12 bg-[#d2d2d7]" />
@@ -573,7 +571,7 @@ export default function Home() {
               </h4>
               <p className="mt-2 max-w-[240px] text-sm font-medium leading-relaxed text-[#999]">
                 3 fully pre-screened candidates with summaries delivered within
-                72 hours. You interview, you hire.
+                days, not weeks. You interview, you hire.
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -589,7 +587,7 @@ export default function Home() {
                 </svg>
               </div>
               <span className="text-xs font-medium text-[#999]">
-                72 hours delivery
+                Delivery within days
               </span>
             </div>
           </div>
@@ -615,7 +613,8 @@ export default function Home() {
             <span className="text-5xl font-bold leading-none tracking-tight text-white/25">03</span>
             <h4 className="mt-3 text-lg font-bold text-white">Receive Your Shortlist</h4>
             <p className="mt-2 text-sm font-medium leading-relaxed text-[#999]">
-              3 fully pre-screened candidates with summaries delivered within 72 hours. You interview, you hire.
+              3 fully pre-screened candidates with summaries delivered within
+              days, not weeks. You interview, you hire.
             </p>
           </div>
         </div>

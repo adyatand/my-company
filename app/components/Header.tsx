@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
@@ -8,11 +9,18 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-between bg-transparent px-6 py-6 md:px-16 lg:px-24">
+      <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-between bg-transparent px-6 pt-4 pb-6 md:px-16 lg:px-24">
         <Link
           href="/"
-          className="font-display text-2xl font-bold tracking-tight text-[#1d1d1f] md:text-3xl"
+          className="flex items-center gap-0 font-display text-2xl font-bold tracking-tight text-[#1d1d1f] md:text-3xl"
         >
+          <Image
+            src="/logos/AT_New_Logo_Trans_BG.png"
+            alt="ArriveTalent logo"
+            width={64}
+            height={64}
+            className="-ml-3 m-0 block h-16 w-16 shrink-0 p-0 object-contain"
+          />
           ArriveTalent
         </Link>
 
@@ -132,10 +140,10 @@ export default function Header() {
 
         <div className="border-t border-white/10 px-8 py-6">
           <a
-            href="mailto:contact@arrivetalent.com"
+            href="mailto:hire@arrivetalent.com"
             className="text-sm font-medium text-white/40 transition-colors hover:text-white"
           >
-            contact@arrivetalent.com
+            hire@arrivetalent.com
           </a>
         </div>
       </nav>
