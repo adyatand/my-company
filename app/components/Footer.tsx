@@ -20,7 +20,7 @@ export default function Footer() {
           <p className="mt-8 text-xs font-medium text-[#555]">Follow us on:</p>
           <div className="mt-2 flex items-center gap-3">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/arrivetalent/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -74,12 +74,6 @@ export default function Footer() {
             className="text-xs font-medium text-[#555] transition-colors duration-300 hover:text-white"
           >
             Privacy Policy
-          </Link>
-          <Link
-            href="/terms"
-            className="text-xs font-medium text-[#555] transition-colors duration-300 hover:text-white"
-          >
-            Terms of Service
           </Link>
         </div>
       </div>

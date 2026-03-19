@@ -225,8 +225,14 @@ export default function ContactPage() {
                     We&apos;ll get back to you within 24 hours.
                   </p>
                   <p className="mt-2 text-center text-[11px] font-medium leading-relaxed text-[#b0b0b0]">
-                    By submitting this form you agree to our Privacy Policy. We
-                    never share your information with third parties.
+                    By submitting this form you agree to our{" "}
+                    <a
+                      href="/privacy"
+                      className="text-[#b0b0b0] underline underline-offset-2 transition-colors hover:text-[#3B82F6]"
+                    >
+                      Privacy Policy
+                    </a>
+                    .
                   </p>
                 </div>
               </form>
