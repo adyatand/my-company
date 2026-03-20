@@ -50,7 +50,10 @@ export default function TeamPage() {
                       alt={logo.alt}
                       width={160}
                       height={56}
-                      className="h-14 w-auto object-contain"
+                      loading="eager"
+                      priority
+                      unoptimized
+                      className="h-14 w-40 object-contain"
                     />
                   </div>
                 ))
@@ -98,9 +101,10 @@ export default function TeamPage() {
                 growth initiatives, and over five years as an HR Consultant at
                 Legajoist Solutions, where she built and scaled hiring processes
                 for growing businesses. Earlier in her career she held senior
-                marketing and communications leadership roles at Marion Biotech
-                and Shalimar Paints, giving her a rare cross-functional
-                perspective that most HR professionals simply don&apos;t have.
+                marketing and communications leadership roles at Sentiss Pharma,
+                Hero Mindmine (Hero Group), and Shalimar Paints (Jindal Group),
+                giving her a rare cross-functional perspective that most HR
+                professionals simply don&apos;t have.
               </p>
               <p className="text-sm font-medium leading-relaxed text-[#86868b]">
                 Neelam&apos;s approach to recruitment goes beyond matching
