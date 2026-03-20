@@ -31,13 +31,15 @@ export default function TeamPage() {
             >
               {[...Array(2)].map((_, setIndex) =>
                 [
-                  { src: "/logos/legajoist-logo.png", alt: "Legajoist" },
-                  { src: "/logos/HiLabs_logo.png", alt: "HiLabs" },
-                  { src: "/logos/Marion-Biotech-logo.png", alt: "Marion Biotech" },
-                  { src: "/logos/Shalimar_Paints_New_Logo.png", alt: "Shalimar Paints" },
                   { src: "/logos/ruptok_fintech_logo.png", alt: "Ruptok Fintech" },
+                  { src: "/logos/hero_logo.png", alt: "Hero" },
                   { src: "/logos/bank-of-america-logo.png", alt: "Bank of America" },
                   { src: "/logos/Delta-Air-Lines-Logo.png", alt: "Delta Air Lines" },
+                  { src: "/logos/sentiss_logo.png", alt: "Sentiss" },
+                  { src: "/logos/walter_bushnell_logo.png", alt: "Walter Bushnell" },
+                  { src: "/logos/HiLabs_logo.png", alt: "HiLabs" },
+                  { src: "/logos/legajoist-logo.png", alt: "Legajoist" },
+                  { src: "/logos/Shalimar_Paints_New_Logo.png", alt: "Shalimar Paints" },
                 ].map((logo) => (
                   <div
                     key={`${setIndex}-${logo.alt}`}
