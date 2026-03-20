@@ -93,6 +93,10 @@ export default function ContactPage() {
                   24 hours. We&apos;re excited to help you find your next great
                   hire.
                 </p>
+                <p className="mt-3 max-w-sm text-xs font-medium leading-relaxed text-[#86868b]">
+                  Your confirmation email is on its way. If you don&apos;t see it in
+                  your inbox, please check your Promotions or Spam folder.
+                </p>
                 <a
                   href="/"
                   className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#1d1d1f] px-8 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-[#333]"
