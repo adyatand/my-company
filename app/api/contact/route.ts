@@ -62,7 +62,7 @@ export async function POST(req: Request) {
   const from = "ArriveTalent <hire@arrivetalent.com>";
   const replyTo = email;
 
-  const internalSubject = `New contact form submission — ${company} / ${role}`;
+  const internalSubject = `New contact form submission: ${company} / ${role}`;
   const internalHtml = `
     <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; line-height: 1.5;">
       <h2 style="margin:0 0 12px 0; font-size:18px;">New contact form submission</h2>
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
   `.trim();
 
   const confirmSubject =
-    "We've Received Your Request — Here's What Happens Next";
+    "We've Received Your Request: Here's What Happens Next";
   const confirmHtml = `
     <div style="margin:0;padding:0;background-color:#ffffff;">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;margin:0;padding:0;background-color:#ffffff;">
@@ -132,7 +132,7 @@ export async function POST(req: Request) {
                         </p>
                         <p style="margin:0;font-size:14px;line-height:1.65;color:#1d1d1f;">
                           <span style="font-weight:700;color:#3B82F6;">3.</span>
-                          Once we&apos;re aligned, we get to work — and deliver qualified, pre-screened candidates who are ready to interview.
+                          Once we&apos;re aligned, we get to work and deliver qualified, pre-screened candidates who are ready to interview.
                         </p>
                       </td>
                     </tr>

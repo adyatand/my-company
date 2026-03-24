@@ -15,7 +15,7 @@ export default function TeamPage() {
           <span className="font-display font-bold">ArriveTalent</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base font-medium text-[#86868b]">
-          Two founders. Twenty years of HR expertise. One obsession — finding
+          Two founders. Twenty years of HR expertise. One obsession: finding
           you the right person, fast.
         </p>
 
@@ -69,7 +69,7 @@ export default function TeamPage() {
       {/* Two-column layout: Founder & Tampa Bay */}
       <section className="px-6 py-16 md:px-16 lg:px-24">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2">
-          {/* Left Column — Founder & CEO */}
+          {/* Left column: Founder & CEO */}
           <div className="flex flex-col">
             <div className="flex shrink-0 flex-col items-start">
               <div className="h-56 w-56 overflow-hidden rounded-2xl">
@@ -110,14 +110,15 @@ export default function TeamPage() {
                 Neelam&apos;s approach to recruitment goes beyond matching
                 resumes to job descriptions. She believes the right hire is
                 defined by cultural alignment, long-term performance potential,
-                and organizational fit — a philosophy that forms the foundation
+                and organizational fit, a philosophy that forms the foundation
                 of everything ArriveTalent does.
               </p>
               <p className="text-sm font-medium leading-relaxed text-[#86868b]">
                 Today she channels that expertise into building a recruiting
                 agency that brings Fortune-500-level HR rigor to fast-growing
-                digital marketing agencies and SaaS companies — at a fraction of
-                the cost and a fraction of the time.
+                companies hiring for go-to-market and revenue-driving roles
+                across Tampa Bay, at a fraction of the cost and a fraction of
+                the time.
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -158,7 +159,7 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* Right Column — Tampa Bay Operations */}
+          {/* Right column: Tampa Bay Operations */}
           <div className="flex flex-col">
             <div className="flex shrink-0 flex-col items-start">
               <div className="h-56 w-full overflow-hidden rounded-2xl">
@@ -180,7 +181,7 @@ export default function TeamPage() {
             <div className="mt-6 flex flex-col gap-4">
               <p className="text-sm font-medium leading-relaxed text-[#86868b]">
                 ArriveTalent&apos;s Tampa Bay presence means our clients
-                aren&apos;t just working with a remote agency — they&apos;re
+                aren&apos;t just working with a remote agency. They&apos;re
                 working with someone embedded in the same market, attending the
                 same events, and building relationships inside the same business
                 community.
@@ -191,9 +192,10 @@ export default function TeamPage() {
                 interviews, and staying with you through offer and onboarding.
               </p>
               <p className="text-sm font-medium leading-relaxed text-[#86868b]">
-                We work exclusively with digital marketing agencies and SaaS
-                companies in the Tampa Bay area — which means we know your market,
-                your roles, and the kind of people who thrive in your environment.
+                We work with growing companies across Tampa Bay hiring for
+                go-to-market and revenue-driving roles, which means we know your
+                market, your candidates, and the kind of people who thrive in
+                your environment.
               </p>
             </div>
           </div>
@@ -212,9 +214,10 @@ export default function TeamPage() {
               Niche Over Everything
             </h4>
             <p className="mt-2 text-sm font-medium leading-relaxed text-[#999]">
-              We only work with digital marketing agencies and SaaS companies.
-              That focus means deeper candidate pipelines, faster placements,
-              and better results than any generalist agency can offer.
+              We specialize exclusively in go-to-market and revenue-driving
+              roles. That focus means deeper candidate pipelines, faster
+              placements, and better results than any generalist agency can
+              offer.
             </p>
           </div>
           <div className="rounded-2xl bg-[#3B82F6] p-6">
@@ -246,7 +249,7 @@ export default function TeamPage() {
           Your next hire is just one message away
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-base font-medium text-[#86868b]">
-          Tell us about your open role and we&apos;ll fill your first position —
+          Tell us about your open role and we&apos;ll fill your first position
           completely free.
         </p>
         <Link

@@ -20,9 +20,9 @@ export default function Footer() {
             />
             ArriveTalent
           </Link>
-          <p className="mt-3 max-w-xs text-sm font-medium leading-relaxed text-[#555]">
-            Top-tier talent for Tampa Bay&apos;s digital agencies and SaaS
-            teams.
+          <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-[#555]">
+            Top tier go-to-market and revenue-driving talent for Tampa
+            Bay&apos;s growing companies.
           </p>
 
           <p className="mt-8 text-xs font-medium text-[#555]">Follow us on:</p>
@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Right — Pages */}
+        {/* Right: pages */}
         <div className="flex flex-col">
           <h4 className="text-sm font-bold text-white">Pages</h4>
           <nav className="mt-4 flex flex-col gap-2.5">

@@ -66,7 +66,7 @@ export default function ContactPage() {
       {/* Two-column section */}
       <section className="px-6 py-16 md:px-16 lg:px-24">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
-          {/* Left column — Form */}
+          {/* Left column: form */}
           <div>
             {submitted ? (
               <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-[#d2d2d7] bg-[#f5f5f7] px-8 py-16 text-center">
@@ -243,7 +243,7 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* Right column — Book a Call */}
+          {/* Right column: book a call */}
           <div className="flex flex-col">
             <div className="flex flex-1 flex-col justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] p-8 md:p-10">
               <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f]">
@@ -251,7 +251,7 @@ export default function ContactPage() {
               </h2>
               <p className="mt-4 text-sm font-medium leading-relaxed text-[#86868b]">
                 Book a 15-minute intro call and let&apos;s discuss your hiring
-                needs directly. No forms, no waiting — just a real conversation.
+                needs directly. No forms, no waiting. Just a real conversation.
               </p>
               <a
                 href="https://calendly.com/hire-arrivetalent/30min"
