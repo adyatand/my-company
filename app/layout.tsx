@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "We fill your open roles in 72 hours. Pre-screened candidates for digital marketing agencies and SaaS companies.",
   metadataBase: new URL("https://arrivetalent.com"),
   openGraph: {
-    title: "ArriveTalent | Stop Sorting Resumes. Start Meeting Candidates.",
+    title: "ArriveTalent | Building Teams For Scaling Businesses.",
     description:
       "Pre-screened, qualified candidates ready to interview for Tampa Bay digital agencies and SaaS teams.",
     url: "https://arrivetalent.com",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ArriveTalent | Stop Sorting Resumes. Start Meeting Candidates.",
+    title: "ArriveTalent | Building Teams For Scaling Businesses.",
     description:
       "Pre-screened, qualified candidates ready to interview for Tampa Bay digital agencies and SaaS teams.",
     images: ["/logos/AT_New_Logo_Trans_BG.png"],
