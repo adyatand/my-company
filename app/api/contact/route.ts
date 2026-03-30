@@ -91,9 +91,12 @@ export async function POST(req: Request) {
   `.trim();
 
   const confirmSubject =
-    "We've Received Your Request: Here's What Happens Next";
+    "Acknowledged: Your Scaling Strategy with ArriveTalent";
   const confirmHtml = `
     <div style="margin:0;padding:0;background-color:#ffffff;">
+      <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap);
+      </style>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;margin:0;padding:0;background-color:#ffffff;">
         <tr>
           <td align="center" style="padding:0;">
@@ -113,42 +116,51 @@ export async function POST(req: Request) {
                     Hi ${escapeHtml(firstNameFromFullName(name))},
                   </p>
                   <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;color:#1d1d1f;">
-                    Thanks for reaching out to ArriveTalent. We&apos;ve received your request and our team is already reviewing your hiring needs.
+                    Thank you for reaching out. We&apos;ve received your details and have already begun a preliminary analysis of your company&apos;s hiring infrastructure.
+                  </p>
+                  <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;color:#1d1d1f;">
+                    At ArriveTalent, we don&apos;t just &quot;fill roles.&quot; We build the human foundations that allow your business to scale without friction.
                   </p>
 
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;border-collapse:separate;background-color:#f5f5f7;border:1px solid #e5e5e5;border-left:4px solid #3B82F6;border-radius:10px;">
                     <tr>
                       <td style="padding:18px 16px 16px 16px;">
-                        <p style="margin:0 0 10px 0;font-size:13px;line-height:1.4;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:#1d1d1f;">
-                          What happens next
+                        <p style="margin:0 0 12px 0;font-size:13px;line-height:1.4;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:#1d1d1f;">
+                          What Happens Next:
                         </p>
-                        <p style="margin:0 0 9px 0;font-size:14px;line-height:1.65;color:#1d1d1f;">
-                          <span style="font-weight:700;color:#3B82F6;">1.</span>
-                          We&apos;ll review your hiring needs and identify the best candidate profile for your role.
+                        <p style="margin:0 0 10px 0;font-size:14px;line-height:1.65;color:#1d1d1f;">
+                          <span style="font-weight:700;color:#1d1d1f;">Strategic Review:</span>
+                          Our leadership team is currently reviewing your hiring needs to ensure we align our sourcing strategy with your long-term business goals.
                         </p>
-                        <p style="margin:0 0 9px 0;font-size:14px;line-height:1.65;color:#1d1d1f;">
-                          <span style="font-weight:700;color:#3B82F6;">2.</span>
-                          Within 24 hours, we&apos;ll follow up with a clear plan and next steps.
+                        <p style="margin:0 0 10px 0;font-size:14px;line-height:1.65;color:#1d1d1f;">
+                          <span style="font-weight:700;color:#1d1d1f;">The 24-Hour Blueprint:</span>
+                          Within one business day, a senior member of our team will follow up with a tailored plan and a clear path forward.
                         </p>
                         <p style="margin:0;font-size:14px;line-height:1.65;color:#1d1d1f;">
-                          <span style="font-weight:700;color:#3B82F6;">3.</span>
-                          Once we&apos;re aligned, we get to work and deliver qualified, pre-screened candidates who are ready to interview.
+                          <span style="font-weight:700;color:#1d1d1f;">The Pilot Phase:</span>
+                          Once aligned, we move immediately into our high-precision vetting process, delivering only the top 1% of candidates who are technically and culturally matched for your mission.
                         </p>
                       </td>
                     </tr>
                   </table>
 
                   <p style="margin:18px 0 0 0;font-size:14px;line-height:1.7;color:#86868b;">
-                    In the meantime, feel free to reply to this email with anything you&apos;d like us to know before we follow up.
+                    In the meantime, if there is a specific urgency or a detail you&apos;d like us to prioritize, simply reply to this email.
+                  </p>
+                  <p style="margin:16px 0 0 0;font-size:15px;line-height:1.65;color:#1d1d1f;font-weight:700;">
+                    While You Focus on the Mission. We&apos;ll Handle the People.
                   </p>
                   <p style="margin:12px 0 0 0;font-size:14px;line-height:1.7;color:#86868b;">
                     If this email landed in your Promotions folder, please move it to your Primary inbox to make sure you don&apos;t miss our follow-up.
                   </p>
-                  <p style="margin:18px 0 0 0;font-size:14px;line-height:1.7;color:#1d1d1f;font-weight:700;">
+                  <p style="margin:22px 0 0 0;font-size:14px;line-height:1.7;color:#1d1d1f;">
+                    Best regards,
+                  </p>
+                  <p style="margin:6px 0 0 0;font-size:14px;line-height:1.7;color:#1d1d1f;font-weight:700;">
                     The ArriveTalent Team
                   </p>
-                  <p style="margin:4px 0 0 0;font-size:13px;line-height:1.6;color:#3B82F6;font-weight:600;">
-                    Stop Sorting Resumes. Start Meeting Candidates
+                  <p style="margin:4px 0 0 0;font-size:13px;line-height:1.6;color:#86868b;font-weight:600;">
+                    Building Teams For Scaling Businesses
                   </p>
                 </td>
               </tr>

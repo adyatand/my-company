@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col">
           <Link
             href="/"
-            className="flex items-center gap-0 font-display text-2xl font-bold tracking-tight text-white"
+            className="flex min-w-0 shrink items-center gap-2 md:gap-2.5"
           >
             <Image
               src="/logos/AT_New_Logo_Trans_BG.png"
@@ -18,12 +18,15 @@ export default function Footer() {
               height={64}
               className="-ml-3 m-0 block h-16 w-16 shrink-0 p-0 object-contain brightness-0 invert"
             />
-            ArriveTalent
+            <span className="flex min-w-0 flex-col gap-0 leading-none">
+              <span className="font-display text-2xl font-bold tracking-tight text-white">
+                ArriveTalent
+              </span>
+              <span className="mt-px text-[9px] font-semibold leading-[1.2] tracking-tight text-white/60 sm:text-[10px] md:mt-0.5">
+                Building Teams For Scaling Businesses
+              </span>
+            </span>
           </Link>
-          <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-[#555]">
-            Top tier go-to-market and revenue-driving talent for Tampa
-            Bay&apos;s growing companies.
-          </p>
 
           <p className="mt-8 text-xs font-medium text-[#555]">Follow us on:</p>
           <div className="mt-2 flex items-center gap-3">
@@ -56,10 +59,10 @@ export default function Footer() {
               Home
             </Link>
             <Link
-              href="/team"
+              href="/story"
               className="text-sm font-medium text-[#555] transition-colors duration-300 hover:text-white"
             >
-              Our Team
+              Our Story
             </Link>
             <Link
               href="/contact"

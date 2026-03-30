@@ -3,52 +3,84 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  /** Same transparent header + light text as home (hero sits under fixed header). */
+  const isHeroOverlayPage =
+    pathname === "/" || pathname === "/story" || pathname === "/contact";
+  const brandTextClass = isHeroOverlayPage ? "text-white" : "text-[#1d1d1f]";
+  const brandTaglineClass = isHeroOverlayPage
+    ? "text-white/70"
+    : "text-[#1d1d1f]/55";
+  const logoClass = isHeroOverlayPage
+    ? "m-0 block h-16 w-16 shrink-0 p-0 object-contain brightness-0 invert"
+    : "m-0 block h-16 w-16 shrink-0 p-0 object-contain";
+  const navLinkClass = isHeroOverlayPage
+    ? "text-sm font-medium text-white/75 transition-colors hover:text-white"
+    : "text-sm font-medium text-[#1d1d1f]/60 transition-colors hover:text-[#1d1d1f]";
+  const ctaClass = isHeroOverlayPage
+    ? "rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#1d1d1f] transition-all duration-300 hover:bg-white/90"
+    : "rounded-full bg-[#1d1d1f] px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#333]";
+  const burgerLineClass = isHeroOverlayPage
+    ? "block h-[2px] w-5 bg-white/80 transition-colors hover:bg-white"
+    : "block h-[2px] w-5 bg-[#1d1d1f]/60 transition-colors hover:bg-[#1d1d1f]";
 
   return (
     <>
       <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-between bg-transparent px-6 pt-4 pb-6 md:px-16 lg:px-24">
         <Link
           href="/"
-          className="flex items-center gap-0 font-display text-2xl font-bold tracking-tight text-[#1d1d1f] md:text-3xl"
+          className="flex min-w-0 shrink items-center gap-2 md:gap-2.5"
         >
           <Image
             src="/logos/AT_New_Logo_Trans_BG.png"
             alt="ArriveTalent logo"
             width={64}
             height={64}
-            className="-ml-3 m-0 block h-16 w-16 shrink-0 p-0 object-contain"
+            className={logoClass}
           />
-          ArriveTalent
+          <span className="flex min-w-0 flex-col gap-0 leading-none">
+            <span
+              className={`font-display text-2xl font-bold tracking-tight md:text-3xl ${brandTextClass}`}
+            >
+              ArriveTalent
+            </span>
+            <span
+              className={`mt-px text-[9px] font-semibold leading-[1.2] tracking-tight sm:text-[10px] md:mt-0.5 ${brandTaglineClass}`}
+            >
+              Building Teams For Scaling Businesses
+            </span>
+          </span>
         </Link>
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
           <Link
             href="/"
-            className="text-sm font-medium text-[#1d1d1f]/60 transition-colors hover:text-[#1d1d1f]"
+            className={navLinkClass}
           >
             Home
           </Link>
           <Link
-            href="/team"
-            className="text-sm font-medium text-[#1d1d1f]/60 transition-colors hover:text-[#1d1d1f]"
+            href="/story"
+            className={navLinkClass}
           >
-            Our Team
+            Our Story
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-medium text-[#1d1d1f]/60 transition-colors hover:text-[#1d1d1f]"
+            className={navLinkClass}
           >
             Contact Us
           </Link>
           <Link
             href="/contact"
-            className="rounded-full bg-[#1d1d1f] px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#333]"
+            className={ctaClass}
           >
-            Hire Now
+            Build Your Team
           </Link>
         </div>
 
@@ -59,9 +91,9 @@ export default function Header() {
           onClick={() => setMenuOpen(true)}
           className="flex flex-col gap-[5px] md:hidden"
         >
-          <span className="block h-[2px] w-5 bg-[#1d1d1f]/60 transition-colors hover:bg-[#1d1d1f]" />
-          <span className="block h-[2px] w-5 bg-[#1d1d1f]/60 transition-colors hover:bg-[#1d1d1f]" />
-          <span className="block h-[2px] w-5 bg-[#1d1d1f]/60 transition-colors hover:bg-[#1d1d1f]" />
+          <span className={burgerLineClass} />
+          <span className={burgerLineClass} />
+          <span className={burgerLineClass} />
         </button>
       </header>
 
@@ -116,11 +148,11 @@ export default function Header() {
             Home
           </Link>
           <Link
-            href="/team"
+            href="/story"
             onClick={() => setMenuOpen(false)}
             className="rounded-xl px-4 py-4 text-2xl font-bold tracking-tight text-white/60 transition-colors hover:bg-white/5 hover:text-white"
           >
-            Our Team
+            Our Story
           </Link>
           <Link
             href="/contact"
@@ -134,7 +166,7 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
             className="mt-4 rounded-full bg-white px-6 py-3 text-center text-base font-bold tracking-tight text-[#1d1d1f] transition-colors hover:bg-white/90"
           >
-            Hire Now
+            Build Your Team
           </Link>
         </div>
 

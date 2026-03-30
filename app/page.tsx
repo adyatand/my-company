@@ -1,50 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
-function TypewriterText({ text }: { text: string }) {
-  const ref = useRef<HTMLHeadingElement>(null);
-  const [displayed, setDisplayed] = useState("");
-  const hasPlayed = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasPlayed.current) {
-          hasPlayed.current = true;
-          let i = 0;
-          const interval = setInterval(() => {
-            i++;
-            setDisplayed(text.slice(0, i));
-            if (i >= text.length) clearInterval(interval);
-          }, 65);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [text]);
-
-  return (
-    <h3
-      ref={ref}
-      className="mt-14 text-center text-lg font-bold leading-tight tracking-tight text-[#e5e5e5] md:text-xl lg:text-2xl"
-    >
-      {displayed}
-      {displayed.length < text.length && (
-        <span className="inline-block w-[2px] h-[1em] bg-[#e5e5e5] align-middle animate-pulse ml-0.5" />
-      )}
-    </h3>
-  );
-}
 
 function CountUp({
   target,
@@ -58,47 +17,71 @@ function CountUp({
   delay?: number;
 }) {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
   const hasPlayed = useRef(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    if (hasPlayed.current) return;
+    hasPlayed.current = true;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasPlayed.current) {
-          hasPlayed.current = true;
+    let frameId = 0;
+    const timeoutId = setTimeout(() => {
+      const startTime = performance.now();
 
-          const timeout = setTimeout(() => {
-            const startTime = performance.now();
+      function tick(now: number) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 5);
+        setCount(Math.round(eased * target));
+        if (progress < 1) frameId = requestAnimationFrame(tick);
+      }
 
-            function tick(now: number) {
-              const elapsed = now - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 5);
-              setCount(Math.round(eased * target));
-              if (progress < 1) requestAnimationFrame(tick);
-            }
+      frameId = requestAnimationFrame(tick);
+    }, delay);
 
-            requestAnimationFrame(tick);
-          }, delay);
-
-          return () => clearTimeout(timeout);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timeoutId);
+      if (frameId) cancelAnimationFrame(frameId);
+    };
   }, [target, duration, delay]);
 
   return (
-    <span ref={ref}>
+    <span>
       {count}
       {suffix}
     </span>
+  );
+}
+
+function IndustryTile({
+  label,
+  file,
+  className = "",
+}: {
+  label: string;
+  file: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`relative min-h-[180px] w-full overflow-hidden rounded-2xl border border-[#e5e7eb] shadow-sm transition-shadow duration-300 hover:shadow-md sm:min-h-[200px] lg:min-h-[220px] ${className}`}
+    >
+      <Image
+        src={`/industries/${encodeURIComponent(file)}`}
+        alt={`${label} industry`}
+        fill
+        className="object-cover transition-transform duration-500 ease-out hover:scale-105"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+      />
+      <div
+        className="absolute inset-0 bg-black/45"
+        aria-hidden
+      />
+      <div className="absolute inset-0 flex items-center justify-center px-4 py-4">
+        <span className="text-center text-sm font-semibold leading-snug tracking-tight text-white drop-shadow-md md:text-base">
+          {label}
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -127,546 +110,273 @@ export default function Home() {
     },
   ];
 
+  const industryTiles = [
+    { label: "Hospitality", file: "Hospitality (1).png" },
+    { label: "Sales", file: "Sales (1).png" },
+    { label: "Accounting & Finance", file: "Accounting_and_Finance (1).png" },
+    { label: "Healthcare", file: "Healthcare (1).png" },
+    { label: "Construction", file: "Construction (1).png" },
+    {
+      label: "Manufacturing & Engineering",
+      file: "Manufacturing (1).png",
+    },
+    { label: "Marketing", file: "Marketing (1).png" },
+    { label: "IT", file: "IT (1).png" },
+    { label: "Human Resources", file: "Human_Resources (1).png" },
+    { label: "Legal", file: "Legal (1).png" },
+    { label: "Education", file: "Education (1).jpg" },
+  ] as const;
+
   return (
     <main className="bg-white text-[#1d1d1f]">
       <Header />
 
       {/* Hero */}
-      <section className="flex min-h-screen flex-col bg-[#f5f5f7] px-6 pt-24 md:px-16 lg:px-24">
-        <div className="flex flex-1 flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16">
-          {/* Left: copy */}
-          <div className="flex flex-1 flex-col items-start justify-center">
-            <h1 className="max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-[3rem]">
-              Stop sorting resumes. Meet <span className="text-[#3B82F6]">top-tier</span>, pre-screened candidates{" "}
-              <br className="md:hidden" />
-              <span className="text-[#3B82F6]">ready to interview</span>
+      <section
+        className="relative flex min-h-screen flex-col overflow-hidden bg-[#f5f5f7] bg-cover bg-center bg-no-repeat px-6 pt-24 md:px-16 lg:px-24"
+        style={{ backgroundImage: "url('/images/Hero_Section_BG.png')" }}
+      >
+        <div className="absolute inset-0 bg-[#0f172a]/55" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-25"
+          style={{
+            backgroundImage:
+              "linear-gradient(115deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 35%), repeating-linear-gradient(90deg, rgba(229,231,235,0.12) 0px, rgba(229,231,235,0.12) 1px, transparent 1px, transparent 140px), repeating-linear-gradient(0deg, rgba(229,231,235,0.08) 0px, rgba(229,231,235,0.08) 1px, transparent 1px, transparent 120px)",
+          }}
+        />
+        <div className="flex flex-1 flex-col items-start justify-center">
+          <div className="relative z-10 flex w-full flex-col items-start justify-center text-left">
+            <h1 className="font-display max-w-3xl text-5xl font-bold leading-[1.05] tracking-tight text-[#f5f5f7] md:text-6xl lg:text-[4rem]">
+              Matching the <span className="text-[#3B82F6]">right talent</span>{" "}
+              with the <span className="text-[#3B82F6]">right team</span>
             </h1>
 
-            <div className="mt-8 h-px w-12 bg-[#d2d2d7]" />
+            <div className="mt-8 h-px w-12 bg-white/45" />
 
-            <p className="mt-8 text-base font-medium tracking-wide text-[#86868b]">
-              Built for Tampa Bay&apos;s growing companies hiring for
-              go-to-market and revenue-driving roles.
+            <p className="mt-8 max-w-3xl text-lg font-medium tracking-wide text-[#f5f5f7] md:text-xl">
+              We don&apos;t just fill roles. We find people who make your business
+              stronger. Because the right hire changes everything.
             </p>
 
-            <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-[#1d1d1f] px-8 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-[#333]"
-              >
-                Claim Your First Hire Free
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </a>
-              <div className="flex items-center gap-2.5 rounded-full border border-[#d2d2d7] bg-white px-8 py-3">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
-                <span className="text-sm font-medium text-[#86868b]">
-                  Now accepting new clients
-                </span>
-              </div>
-            </div>
           </div>
 
-          {/* Right: floating candidate cards */}
-          <div className="relative hidden h-[520px] w-full max-w-[340px] shrink-0 md:block lg:max-w-[380px]">
-            {/* Card 1: Jordan M., AE */}
-            <div className="absolute top-0 right-4 left-0 animate-[fadeSlideUp_0.8s_ease-out_0.2s_both] rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-lg">
-              <div className="flex items-start gap-3">
-                <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#f5f5f7]">
-                  <Image
-                    src="/cards/jordan.png"
-                    alt="Jordan M."
-                    width={40}
-                    height={40}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-[#1d1d1f]">Jordan M.</p>
-                  <p className="text-xs font-medium text-[#86868b]">
-                    Account Executive
-                  </p>
-                </div>
-                <span className="shrink-0 self-center whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-600">
-                  98% match
-                </span>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  B2B Sales
-                </span>
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  $1.4M ARR closed
-                </span>
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  Salesforce
-                </span>
-              </div>
-              <div className="mt-4 flex items-center gap-1.5">
-                <div className="h-1.5 flex-1 rounded-full bg-[#f5f5f7]">
-                  <div className="h-1.5 w-[98%] rounded-full bg-[#3B82F6]" />
-                </div>
-                <span className="text-[10px] font-semibold text-[#3B82F6]">
-                  98%
-                </span>
-              </div>
-            </div>
-
-            {/* Card 2: Ryan T., BDR */}
-            <div className="absolute top-[175px] right-0 left-6 animate-[fadeSlideUp_0.8s_ease-out_0.5s_both] rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-lg">
-              <div className="flex items-start gap-3">
-                <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#f5f5f7]">
-                  <Image
-                    src="/cards/ryan.png"
-                    alt="Ryan T."
-                    width={40}
-                    height={40}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-[#1d1d1f]">Ryan T.</p>
-                  <p className="text-xs font-medium leading-snug text-[#86868b]">
-                    Business Development Representative
-                  </p>
-                </div>
-                <span className="shrink-0 self-center whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-600">
-                  95% match
-                </span>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  Outbound Sales
-                </span>
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  HubSpot
-                </span>
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  120% quota attainment
-                </span>
-              </div>
-              <div className="mt-4 flex items-center gap-1.5">
-                <div className="h-1.5 flex-1 rounded-full bg-[#f5f5f7]">
-                  <div className="h-1.5 w-[95%] rounded-full bg-violet-500" />
-                </div>
-                <span className="text-[10px] font-semibold text-violet-600">
-                  95%
-                </span>
-              </div>
-            </div>
-
-            {/* Card 3: Ashley K., CSM */}
-            <div className="absolute top-[350px] right-3 left-2 animate-[fadeSlideUp_0.8s_ease-out_0.8s_both] rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-lg">
-              <div className="flex items-start gap-3">
-                <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#f5f5f7]">
-                  <Image
-                    src="/cards/ashley.png"
-                    alt="Ashley K."
-                    width={40}
-                    height={40}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-[#1d1d1f]">Ashley K.</p>
-                  <p className="text-xs font-medium text-[#86868b]">
-                    Customer Success Manager
-                  </p>
-                </div>
-                <span className="shrink-0 self-center whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-600">
-                  92% match
-                </span>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  SaaS
-                </span>
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  98% retention rate
-                </span>
-                <span className="rounded-full bg-[#f5f5f7] px-2.5 py-1 text-[11px] font-medium text-[#86868b]">
-                  3 yrs exp
-                </span>
-              </div>
-              <div className="mt-4 flex items-center gap-1.5">
-                <div className="h-1.5 flex-1 rounded-full bg-[#f5f5f7]">
-                  <div className="h-1.5 w-[92%] rounded-full bg-amber-500" />
-                </div>
-                <span className="text-[10px] font-semibold text-amber-600">
-                  92%
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Trust metrics */}
-        <div className="grid grid-cols-3 gap-4 pb-14 md:gap-6">
-          <div className="flex flex-col items-center gap-2 overflow-hidden rounded-xl border border-[#d2d2d7] bg-white">
-            <div className="h-[2px] w-full bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]/40" />
-            <div className="flex flex-col items-center gap-1 py-5">
-              <span className="text-2xl font-bold tracking-tight text-[#1d1d1f]">
-                <CountUp target={20} suffix="+" delay={0} duration={2500} />
+        <div className="relative z-10 grid grid-cols-3 gap-6 pb-14 md:gap-12">
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-[6px] w-full max-w-[220px] bg-[#55c122]" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-2xl font-bold tracking-tight text-[#f5f5f7] md:text-4xl">
+                <CountUp target={20} suffix="+" delay={0} duration={4200} />
               </span>
-              <span className="text-center text-[11px] font-medium uppercase tracking-wider text-[#86868b]">
+              <span className="text-center text-[11px] font-medium uppercase tracking-wider text-white/80 md:text-sm">
                 Years HR Expertise
               </span>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-2 overflow-hidden rounded-xl border border-[#d2d2d7] bg-white">
-            <div className="h-[2px] w-full bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]/40" />
-            <div className="flex flex-col items-center gap-1 py-5">
-              <span className="text-2xl font-bold tracking-tight text-[#1d1d1f]">
-                <CountUp target={72} suffix="hr" delay={2500} duration={2000} />
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-[6px] w-full max-w-[220px] bg-[#f5c518]" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-2xl font-bold tracking-tight text-[#f5f5f7] md:text-4xl">
+                <CountUp target={72} suffix="hr" delay={0} duration={4200} />
               </span>
-              <span className="text-[11px] font-medium uppercase tracking-wider text-[#86868b]">
+              <span className="text-center text-[11px] font-medium uppercase tracking-wider text-white/80 md:text-sm">
                 Avg. Delivery
               </span>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-2 overflow-hidden rounded-xl border border-[#d2d2d7] bg-white">
-            <div className="h-[2px] w-full bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]/40" />
-            <div className="flex flex-col items-center gap-1 py-5">
-              <span className="text-2xl font-bold tracking-tight text-[#1d1d1f]">
-                $<CountUp target={0} suffix="" delay={4500} duration={1500} />
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-[6px] w-full max-w-[220px] bg-[#00b7c7]" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-2xl font-bold tracking-tight text-[#f5f5f7] md:text-4xl">
+                <CountUp target={90} suffix="" delay={0} duration={4200} />
               </span>
-              <span className="text-[11px] font-medium uppercase tracking-wider text-[#86868b]">
-                Upfront Cost
+              <span className="text-center text-[11px] font-medium uppercase tracking-wider text-white/80 md:text-sm">
+                Day Performance Guarantee
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Here's What You Get (after hero) */}
-      <section className="bg-white px-6 py-12 md:px-16 lg:px-24">
-        <h3 className="text-center text-3xl font-bold tracking-tight text-[#1d1d1f] md:text-4xl lg:text-5xl">
-          Here&apos;s what you get
-        </h3>
-
-        {/* Desktop: expandable horizontal cards */}
-        <div className="group/row mx-auto mt-14 hidden h-[280px] gap-3 md:flex">
-          {/* Expertise */}
-          <div className="group/card relative flex flex-[1] cursor-default flex-col justify-between overflow-hidden rounded-2xl bg-[#dbeafe] p-6 transition-all duration-500 ease-in-out hover:flex-[2.5]">
-            <div>
-              <span className="text-5xl font-bold leading-none tracking-tight text-[#1d1d1f] lg:text-6xl">
-                20<span className="text-3xl lg:text-4xl">+</span>
+      {/* Why ArriveTalent */}
+      <section className="bg-[#f8f8fa] px-6 py-12 md:px-16 lg:px-24">
+        <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="flex flex-col items-start">
+            <h3 className="text-3xl font-bold tracking-tight text-[#1d1d1f] md:text-4xl lg:text-5xl">
+              Why ArriveTalent
+            </h3>
+            <p className="mt-4 max-w-xl text-lg font-semibold leading-snug text-[#1d1d1f] md:text-xl">
+              A full talent acquisition department, for less than the cost of
+              one recruiter.
+            </p>
+            <p className="mt-6 max-w-xl text-base font-medium leading-relaxed text-[#86868b] md:text-lg">
+              Most growing companies face the same choice: spend $75,000+ on a
+              full-time recruiter, or have leadership waste hours sorting
+              resumes instead of running the business. ArriveTalent solves both.
+              We handle everything your Talent Acquisition department would handle, and you pay
+              nothing until you hire someone who makes your team stronger.
+            </p>
+            <a
+              href="/contact"
+              className="group mt-8 inline-flex items-center gap-2 rounded-none border border-[#1d1d1f] bg-transparent px-8 py-3 text-sm font-semibold tracking-wide text-[#1d1d1f] transition-all duration-300 hover:bg-[#1d1d1f] hover:text-white"
+            >
+              Find Your Talent
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                →
               </span>
-              <span className="mt-1 block text-lg font-medium text-[#1d1d1f]/40">
-                Years
-              </span>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-[#3B82F6]">Expertise</p>
-              <p className="mt-1 max-h-0 overflow-hidden text-sm font-medium leading-relaxed text-[#1d1d1f]/60 opacity-0 transition-all duration-500 ease-in-out group-hover/card:max-h-24 group-hover/card:opacity-100">
-                Screened with the rigor of a seasoned HR professional with 20+
-                years of experience, not a junior recruiter following a
-                checklist.
-              </p>
-            </div>
+            </a>
           </div>
 
-          {/* Match */}
-          <div className="group/card relative flex flex-[1] cursor-default flex-col justify-between overflow-hidden rounded-2xl bg-[#3B82F6] p-6 transition-all duration-500 ease-in-out hover:flex-[2.5]">
-            <div>
-              <span className="text-5xl font-bold leading-none tracking-tight text-white lg:text-6xl">
-                72<span className="text-3xl lg:text-4xl">hr</span>
-              </span>
-              <span className="mt-1 block text-lg font-medium text-white/40">
-                Average
-              </span>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-white">Turnaround</p>
-              <p className="mt-1 max-h-0 overflow-hidden text-sm font-medium leading-relaxed text-white/70 opacity-0 transition-all duration-500 ease-in-out group-hover/card:max-h-24 group-hover/card:opacity-100">
-                AI-assisted sourcing combines human judgment with powerful tools,
-                delivering faster shortlists and better-matched candidates.
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:pt-20">
+            <div className="rounded-none bg-gradient-to-br from-white/75 to-white/45 p-6 backdrop-blur-[1px]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#86868b]">
+                A Full TA Team
+              </p>
+              <h4 className="mt-3 text-base font-bold leading-snug text-[#1d1d1f] md:text-lg">
+                A Full TA Team Behind Every Search
+              </h4>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-[#1d1d1f]/70">
+                Job postings, active sourcing, resume reviews, candidate
+                screening, interview scheduling: all handled. Everything a full
+                internal TA team does, without a single person on your payroll.
+                No paid time off. No benefits. Just high quality service, every
+                time.
               </p>
             </div>
-          </div>
-
-          {/* Zero Risk */}
-          <div className="group/card relative flex flex-[1] cursor-default flex-col justify-between overflow-hidden rounded-2xl bg-[#1d1d1f] p-6 transition-all duration-500 ease-in-out hover:flex-[2.5]">
-            <div>
-              <span className="text-5xl font-bold leading-none tracking-tight text-white lg:text-6xl">
-                $0
-              </span>
-              <span className="mt-1 block text-lg font-medium text-white/30">
-                Risk
-              </span>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-white">Zero Risk</p>
-              <p className="mt-1 max-h-0 overflow-hidden text-sm font-medium leading-relaxed text-white/60 opacity-0 transition-all duration-500 ease-in-out group-hover/card:max-h-24 group-hover/card:opacity-100">
-                Your first placement is completely free. After that, our fee is
-                12–15% of the hired candidate&apos;s first-year salary, only
-                charged when you make a hire. Includes a 90-day replacement
-                guarantee. No retainers. No upfront costs. Ever.
+            <div className="rounded-none bg-gradient-to-br from-white/75 to-white/45 p-6 backdrop-blur-[1px]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#86868b]">
+                The Savings
+              </p>
+              <h4 className="mt-3 text-base font-bold leading-snug text-[#1d1d1f] md:text-lg">
+                Save Up to $100,000 a Year
+              </h4>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-[#1d1d1f]/70">
+                A full-time recruiter costs $75,000+ per year before benefits and
+                taxes, regardless of performance. With ArriveTalent you pay only
+                when you hire. We also put a maximum cap on our monthly fees so
+                you never overpay for growth. Even at high hiring volume you
+                will pay us less than you would a single recruiter. The money
+                you save stays in your business.
               </p>
             </div>
-          </div>
-
-          {/* Candidates Per Role */}
-          <div className="group/card relative flex flex-[1] cursor-default flex-col justify-between overflow-hidden rounded-2xl bg-[#bae6fd] p-6 transition-all duration-500 ease-in-out hover:flex-[2.5]">
-            <div>
-              <span className="text-5xl font-bold leading-none tracking-tight text-[#1d1d1f] lg:text-6xl">
-                3<span className="text-3xl lg:text-4xl">x</span>
-              </span>
-              <span className="mt-1 block text-lg font-medium text-[#1d1d1f]/40">
-                Per Role
-              </span>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-[#1d1d1f]">
-                Candidates Per Role
+            <div className="rounded-none bg-gradient-to-br from-white/75 to-white/45 p-6 backdrop-blur-[1px]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#86868b]">
+                Performance Guarantee
               </p>
-              <p className="mt-1 max-h-0 overflow-hidden text-sm font-medium leading-relaxed text-[#1d1d1f]/60 opacity-0 transition-all duration-500 ease-in-out group-hover/card:max-h-24 group-hover/card:opacity-100">
-                Every search delivers exactly three fully pre-screened
-                candidates: no floods of resumes, no wasted interviews. Just
-                three strong fits, every time.
+              <h4 className="mt-3 text-base font-bold leading-snug text-[#1d1d1f] md:text-lg">
+                A Guarantee Most Recruiters Won&apos;t Touch
+              </h4>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-[#1d1d1f]/70">
+                Every placement comes with a 90-day replacement guarantee. If it
+                doesn&apos;t work out we find a replacement completely free, no
+                questions asked. We offer this because we are that confident in
+                who we send you.
+              </p>
+            </div>
+            <div className="rounded-none bg-gradient-to-br from-white/75 to-white/45 p-6 backdrop-blur-[1px]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#86868b]">
+                Candidates Who Perform
+              </p>
+              <h4 className="mt-3 text-base font-bold leading-snug text-[#1d1d1f] md:text-lg">
+                Only Candidates Who Make You Stronger
+              </h4>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-[#1d1d1f]/70">
+                Every candidate is fully vetted before they reach your desk:
+                skills assessment, cultural fit, thorough interview. You only
+                meet the top candidates for your role. No resume floods. No
+                wasted interviews. Just the right people for your team.
               </p>
             </div>
           </div>
         </div>
-
-        {/* Mobile: stacked cards */}
-        <div className="mt-14 flex flex-col gap-3 md:hidden">
-          <div className="rounded-2xl bg-[#dbeafe] p-6">
-            <span className="text-4xl font-bold tracking-tight text-[#1d1d1f]">
-              20<span className="text-2xl">+</span>
-            </span>
-            <p className="mt-3 text-sm font-bold text-[#3B82F6]">Years Expertise</p>
-            <p className="mt-1 text-sm font-medium leading-relaxed text-[#1d1d1f]/60">
-              Screened with the rigor of a seasoned HR professional with 20+
-              years of experience, not a junior recruiter following a
-              checklist.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-[#3B82F6] p-6">
-            <span className="text-4xl font-bold tracking-tight text-white">
-              72<span className="text-2xl">hr</span>
-            </span>
-            <p className="mt-3 text-sm font-bold text-white">Turnaround</p>
-            <p className="mt-1 text-sm font-medium leading-relaxed text-white/70">
-              AI-assisted sourcing combines human judgment with powerful tools,
-              delivering faster shortlists and better-matched candidates.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-[#1d1d1f] p-6">
-            <span className="text-4xl font-bold tracking-tight text-white">
-              $0
-            </span>
-            <p className="mt-3 text-sm font-bold text-white">Zero Risk</p>
-            <p className="mt-1 text-sm font-medium leading-relaxed text-white/60">
-              Your first placement is completely free. After that, our fee is
-              12–15% of the hired candidate&apos;s first-year salary, only
-              charged when you make a hire. Includes a 90-day replacement
-              guarantee. No retainers. No upfront costs. Ever.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-[#bae6fd] p-6">
-            <span className="text-4xl font-bold tracking-tight text-[#1d1d1f]">
-              3<span className="text-2xl">x</span>
-            </span>
-            <p className="mt-3 text-sm font-bold text-[#1d1d1f]">
-              Candidates Per Role
-            </p>
-            <p className="mt-1 text-sm font-medium leading-relaxed text-[#1d1d1f]/60">
-              Every search delivers exactly three fully pre-screened
-              candidates: no floods of resumes, no wasted interviews. Just three
-              strong fits, every time.
-            </p>
-          </div>
-        </div>
-
-        <p className="mt-14 text-center text-lg font-bold leading-tight tracking-tight text-[#1d1d1f] md:text-xl lg:text-2xl">
-          Our model only works if yours does. So we make sure yours does.
-        </p>
       </section>
 
-      {/* How We Work */}
-      <section id="how-it-works" className="bg-[#1d1d1f] px-6 py-16 md:px-16 md:py-20 lg:px-24">
-        <h3 className="text-center text-3xl font-bold tracking-tight text-[#e5e5e5] md:text-4xl lg:text-5xl">
-          How We Work
-        </h3>
-
-        {/* Desktop: horizontal cards with big numbers */}
-        <div className="mx-auto mt-14 hidden h-[300px] gap-3 md:flex">
-          {/* Step 1 */}
-          <div className="group relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-[#333] bg-gradient-to-br from-[#2a2a2a] to-[#222] p-6 transition-all duration-300 hover:border-[#3B82F6]/40">
-            <div>
-              <span className="text-6xl font-bold leading-none tracking-tight text-white/25 lg:text-7xl">
-                01
-              </span>
-              <h4 className="mt-3 text-lg font-bold text-white">
-                Share Your Role
-              </h4>
-              <p className="mt-2 max-w-[240px] text-sm font-medium leading-relaxed text-[#999]">
-                Send us the job description and what great looks like to you.
-                Takes 10 minutes.
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#3B82F6]/10">
-                <svg
-                  className="h-4 w-4 text-[#3B82F6]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <span className="text-xs font-medium text-[#999]">
-                10 min setup
-              </span>
-            </div>
+      {/* What We Offer */}
+      <section
+        id="how-it-works"
+        className="relative overflow-hidden bg-[#0f172a] bg-cover bg-center bg-no-repeat px-6 py-16 md:px-16 md:py-20 lg:px-24"
+        style={{ backgroundImage: "url('/images/WWO_Section_BG.png')" }}
+      >
+        <div className="absolute inset-0 bg-[#0f172a]/55" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-25"
+          style={{
+            backgroundImage:
+              "linear-gradient(115deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 35%), repeating-linear-gradient(90deg, rgba(229,231,235,0.12) 0px, rgba(229,231,235,0.12) 1px, transparent 1px, transparent 140px), repeating-linear-gradient(0deg, rgba(229,231,235,0.08) 0px, rgba(229,231,235,0.08) 1px, transparent 1px, transparent 120px)",
+          }}
+        />
+        <div className="relative z-10 w-full">
+          <div className="text-center">
+            <h3 className="text-3xl font-bold tracking-tight text-[#f5f5f7] md:text-4xl lg:text-5xl">
+              What We Offer
+            </h3>
+            <p className="mx-auto mt-5 w-fit max-w-full text-base font-medium leading-relaxed text-[#f5f5f7]/90 md:text-lg">
+              We integrate directly with your leadership team to handle the
+              end-to-end recruitment lifecycle.
+            </p>
           </div>
 
-          {/* Step 2 */}
-          <div className="group relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl bg-[#3B82F6] p-6 transition-all duration-300">
-            <div>
-              <span className="text-6xl font-bold leading-none tracking-tight text-white/30 lg:text-7xl">
-                02
-              </span>
-              <h4 className="mt-3 text-lg font-bold text-white">
-                We Source &amp; Screen
-              </h4>
-              <p className="mt-2 max-w-[240px] text-sm font-medium leading-relaxed text-white/70">
-                Our AI-assisted pipeline finds, vets, and scores candidates
-                against your exact criteria.
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15">
-                <svg
-                  className="h-4 w-4 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <span className="text-xs font-medium text-white/80">
-                AI-powered, human-verified
-              </span>
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className="group relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-[#333] bg-gradient-to-br from-[#2a2a2a] to-[#222] p-6 transition-all duration-300 hover:border-[#3B82F6]/40">
-            <div>
-              <span className="text-6xl font-bold leading-none tracking-tight text-white/25 lg:text-7xl">
-                03
-              </span>
-              <h4 className="mt-3 text-lg font-bold text-white">
-                Receive Your Shortlist
-              </h4>
-              <p className="mt-2 max-w-[240px] text-sm font-medium leading-relaxed text-[#999]">
-                3 fully pre-screened candidates with summaries delivered within
-                days, not weeks. You interview, you hire.
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#3B82F6]/10">
-                <svg
-                  className="h-4 w-4 text-[#3B82F6]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <span className="text-xs font-medium text-[#999]">
-                Delivery within days
-              </span>
-            </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-14 lg:gap-5">
+            {[
+              {
+                title: "Strategic Alignment & Calibration",
+                body: "We sit down with your leadership to understand your growth goals, culture, and the DNA of your top performers. We don't just look for skills; we look for the people who will drive your business forward.",
+              },
+              {
+                title: "End-to-End Search Management",
+                body: "ArriveTalent takes over the heavy lifting. From writing compelling job narratives and active headhunting on premium platforms to initial screenings and technical vetting\u2014we manage every touchpoint. You only see the top 1% of candidates who are ready to hit the ground running.",
+              },
+              {
+                title: "Seamless Coordination with Hiring Managers",
+                body: "We act as your internal coordination arm. We schedule interviews, manage candidate communications, and provide detailed scorecards based on your exact criteria. We protect your time by ensuring you only meet with fully vetted, high-intent professionals.",
+              },
+              {
+                title: "Performance-Based Growth",
+                body: "You make the final decision. We handle the offer negotiations and closing process. Because we operate on a performance-based model with capped monthly fees, you get the results of a dedicated department with the flexibility of a partner who only wins when you do.",
+              },
+            ].map(({ title, body }) => (
+              <article
+                key={title}
+                className="group flex flex-col border border-white/15 bg-gradient-to-br from-black/55 to-black/35 p-7 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-md transition-colors duration-300 hover:border-white/25 md:p-8"
+              >
+                <h4 className="text-lg font-bold leading-snug tracking-tight text-[#f5f5f7] md:text-xl">
+                  {title}
+                </h4>
+                <p className="mt-4 text-sm font-medium leading-relaxed text-[#f5f5f7]/85 md:text-[15px] md:leading-[1.65]">
+                  {body}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
-
-        {/* Mobile: stacked cards */}
-        <div className="mt-14 flex flex-col gap-3 md:hidden">
-          <div className="rounded-2xl border border-[#333] bg-gradient-to-br from-[#2a2a2a] to-[#222] p-6">
-            <span className="text-5xl font-bold leading-none tracking-tight text-white/25">01</span>
-            <h4 className="mt-3 text-lg font-bold text-white">Share Your Role</h4>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-[#999]">
-              Send us the job description and what great looks like to you. Takes 10 minutes.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-[#3B82F6] p-6">
-            <span className="text-5xl font-bold leading-none tracking-tight text-white/30">02</span>
-            <h4 className="mt-3 text-lg font-bold text-white">We Source &amp; Screen</h4>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-white/70">
-              Our AI-assisted pipeline finds, vets, and scores candidates against your exact criteria.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-[#333] bg-gradient-to-br from-[#2a2a2a] to-[#222] p-6">
-            <span className="text-5xl font-bold leading-none tracking-tight text-white/25">03</span>
-            <h4 className="mt-3 text-lg font-bold text-white">Receive Your Shortlist</h4>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-[#999]">
-              3 fully pre-screened candidates with summaries delivered within
-              days, not weeks. You interview, you hire.
-            </p>
-          </div>
-        </div>
-
-        <TypewriterText text="This is what hiring was always supposed to feel like." />
       </section>
 
-      {/* Roles We Fill */}
-      <section className="bg-[#f5f5f7] px-6 py-12 md:px-16 lg:px-24">
-        <h3 className="text-center text-3xl font-bold tracking-tight text-[#1d1d1f] md:text-4xl lg:text-5xl">
-          Roles We Fill
+      {/* Industries We Serve */}
+      <section
+        id="industries"
+        className="bg-white px-6 py-14 md:px-16 md:py-20 lg:px-24"
+      >
+        <h3 className="text-center text-3xl font-bold tracking-tight text-[#0f172a] md:text-4xl lg:text-5xl">
+          Industries We Serve
         </h3>
 
-        <div className="mx-auto mt-14 max-w-5xl">
-          <div className="overflow-hidden rounded-xl border border-[#d2d2d7] bg-white transition-all duration-300 hover:border-[#86868b]">
-            <div className="h-[2px] bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]/40" />
-            <div className="p-8 md:p-10">
-              <ul className="grid grid-cols-1 gap-y-3.5 md:grid-cols-3 md:gap-x-8 md:gap-y-7">
-                {[
-                  "Account Executives",
-                  "Sales Development Reps",
-                  "Business Development Reps",
-                  "Account Managers",
-                  "Customer Success Managers",
-                  "Marketing Coordinators",
-                  "Social Media Managers",
-                  "Copywriters & Content Writers",
-                  "SEO Specialists",
-                  "Operations & Admin Roles & more",
-                ].map((role) => (
-                  <li
-                    key={role}
-                    className="flex items-start gap-3 text-sm font-medium text-[#86868b]"
-                  >
-                    <svg
-                      className="mt-0.5 h-4 w-4 shrink-0 text-[#3B82F6]"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    {role}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="mx-auto mt-12 max-w-6xl">
+          <div className="grid auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:gap-5">
+            {industryTiles.slice(0, 8).map(({ label, file }) => (
+              <IndustryTile key={label} label={label} file={file} />
+            ))}
+          </div>
+          <div className="mt-3 flex flex-wrap justify-center gap-3 sm:mt-4 sm:gap-4 lg:mt-5 lg:gap-5">
+            {industryTiles.slice(8).map(({ label, file }) => (
+              <IndustryTile
+                key={label}
+                label={label}
+                file={file}
+                className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc((100%-3.75rem)/4)] lg:max-w-none"
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -677,7 +387,7 @@ export default function Home() {
         className="bg-[#141414] px-6 py-16 text-center md:px-16 md:py-20 lg:px-24"
       >
         <h3 className="text-4xl font-bold leading-tight tracking-tight text-[#e5e5e5] md:text-5xl lg:text-6xl">
-          Ready to hire faster?
+          Secure Your Competitive Advantage
         </h3>
 
         <p className="mt-6 text-xl font-bold tracking-tight text-white/80 md:text-2xl">
@@ -688,7 +398,7 @@ export default function Home() {
 
         <p className="mx-auto mt-8 max-w-lg text-sm font-medium leading-relaxed text-[#999]">
           Founding partners receive free first placement, priority service, and
-          preferred pricing locked in permanently.
+          preferred pricing locked in.
         </p>
 
         <p className="mt-6 text-lg font-medium text-[#999] md:text-xl">
