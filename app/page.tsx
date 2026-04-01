@@ -154,8 +154,8 @@ export default function Home() {
             <div className="mt-8 h-px w-12 bg-white/45" />
 
             <p className="mt-8 max-w-3xl text-lg font-medium tracking-wide text-[#f5f5f7] md:text-xl">
-              We don&apos;t just fill roles. We find people who make your business
-              stronger. Because the right hire changes everything.
+              A full-service talent acquisition partner — built to find the
+              people your business needs to grow.
             </p>
 
           </div>
