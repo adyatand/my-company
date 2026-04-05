@@ -21,9 +21,6 @@ export default function Header() {
   const navLinkClass = isHeroOverlayPage
     ? "text-sm font-medium text-white/75 transition-colors hover:text-white"
     : "text-sm font-medium text-[#1d1d1f]/60 transition-colors hover:text-[#1d1d1f]";
-  const ctaClass = isHeroOverlayPage
-    ? "rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#1d1d1f] transition-all duration-300 hover:bg-white/90"
-    : "rounded-full bg-[#1d1d1f] px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#333]";
   const burgerLineClass = isHeroOverlayPage
     ? "block h-[2px] w-5 bg-white/80 transition-colors hover:bg-white"
     : "block h-[2px] w-5 bg-[#1d1d1f]/60 transition-colors hover:bg-[#1d1d1f]";
@@ -75,12 +72,6 @@ export default function Header() {
             className={navLinkClass}
           >
             Contact Us
-          </Link>
-          <Link
-            href="/contact"
-            className={ctaClass}
-          >
-            Build Your Team
           </Link>
         </div>
 
@@ -160,13 +151,6 @@ export default function Header() {
             className="rounded-xl px-4 py-4 text-2xl font-bold tracking-tight text-white/60 transition-colors hover:bg-white/5 hover:text-white"
           >
             Contact Us
-          </Link>
-          <Link
-            href="/contact"
-            onClick={() => setMenuOpen(false)}
-            className="mt-4 rounded-full bg-white px-6 py-3 text-center text-base font-bold tracking-tight text-[#1d1d1f] transition-colors hover:bg-white/90"
-          >
-            Build Your Team
           </Link>
         </div>
 
