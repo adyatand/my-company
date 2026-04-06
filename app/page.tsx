@@ -123,21 +123,21 @@ function IndustryTile({
 const HIRING_ACCORDION_ITEMS = [
   {
     id: "roles-revenue",
-    title: "Roles Filled. Revenue Recovered.",
+    title: "Roles Filled. Revenue Recovered",
     preview:
       "The average company takes 42 days to fill a role. Every...",
     body: "The average company takes 42 days to fill a role. Every vacant seat costs real money — lost pipeline, missed targets, and a team stretched thin. Our AI-powered sourcing stack actively scans thousands of profiles and initiates outreach simultaneously, compressing the entire timeline. Pre-screened, interview-ready candidates are on your desk within days of kickoff.",
   },
   {
     id: "beyond-job-board",
-    title: "Beyond the Job Board.",
+    title: "Beyond the Job Board",
     preview:
       "Job boards only reach 27% of available talent. The other 73% are passive...",
     body: "Job boards only reach 27% of available talent. The other 73% are passive, not job searching, and completely invisible to a standard hiring process. Those are the people you actually want. Our AI-driven tools map the full talent landscape for your role, identifying passive candidates by skills, experience, and fit. Then initiating personalized outreach at scale to start conversations your job posting never could.",
   },
   {
     id: "finalists",
-    title: "Finalists Only. No Noise.",
+    title: "Finalists Only. No Noise",
     preview:
       "The average internal process requires 20 first round interviews per hire...",
     body: "The average internal process requires 20 first round interviews per hire. Which means 25 hours of leadership time per role. We eliminate that. Our AI screening layer filters every candidate against your exact criteria first. Those who pass go through a structured interview with our HR leaders assessing communication, cultural fit, and long-term potential. You only receive the finalists and a one-page brief on each. A few final conversations. One hire.",
@@ -250,7 +250,7 @@ export default function Home() {
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 z-0 bg-[#f5f5f7] bg-cover bg-fixed bg-center bg-no-repeat"
+          className="pointer-events-none absolute inset-0 z-0 bg-[#f5f5f7] bg-cover bg-center bg-no-repeat md:bg-fixed"
           style={{
             backgroundImage: "url('/images/Hero_Section_BG.png')",
           }}
@@ -381,7 +381,7 @@ export default function Home() {
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 z-0 bg-[#0f172a] bg-cover bg-fixed bg-center bg-no-repeat"
+          className="pointer-events-none absolute inset-0 z-0 bg-[#0f172a] bg-cover bg-center bg-no-repeat md:bg-fixed"
           style={{
             backgroundImage: "url('/images/WWO_Section_BG.png')",
           }}
