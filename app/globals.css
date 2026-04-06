@@ -30,6 +30,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .industries-marquee-track {
+    animation: none !important;
+  }
+}
+
 @keyframes step-activate {
   0% {
     opacity: 0.15;
