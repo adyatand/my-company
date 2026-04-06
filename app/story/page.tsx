@@ -1,9 +1,30 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FlowOrbs } from "../components/FlowOrbs";
 import VisionAccordionCards from "./VisionAccordionCards";
+
+const storyDescription =
+  "Learn how ArriveTalent combines deep HR expertise with AI-powered hiring to build teams for scaling businesses.";
+
+export const metadata: Metadata = {
+  title: "Our Story",
+  description: storyDescription,
+  openGraph: {
+    title: "ArriveTalent | Our Story",
+    description: storyDescription,
+    url: "/story",
+  },
+  twitter: {
+    title: "ArriveTalent | Our Story",
+    description: storyDescription,
+  },
+  alternates: {
+    canonical: "/story",
+  },
+};
 
 const COMPANY_LOGOS = [
   { src: "/logos/ruptok_fintech_logo.png", alt: "Ruptok Fintech" },

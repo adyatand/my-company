@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import fs from "fs/promises";
 import path from "path";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Privacy policy for ArriveTalent.",
+  alternates: {
+    canonical: "/privacy",
+  },
+};
 
 export default async function PrivacyPage() {
   const htmlPath = path.join(

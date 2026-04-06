@@ -13,15 +13,14 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Arrive Talent",
+  title: {
+    default: "ArriveTalent",
+    template: "ArriveTalent | %s",
+  },
   description:
-    "We fill your open roles in 72 hours. Pre-screened candidates for digital marketing agencies and SaaS companies.",
-  metadataBase: new URL("https://arrivetalent.com"),
+    "The Next Level of Hiring. We combine 20+ years of HR expertise with modern AI-powered tools to serve as your full-service talent acquisition partner.",
+  metadataBase: new URL("https://www.arrivetalent.com"),
   openGraph: {
-    title: "ArriveTalent | Building Teams For Scaling Businesses.",
-    description:
-      "Pre-screened, qualified candidates ready to interview for Tampa Bay digital agencies and SaaS teams.",
-    url: "https://arrivetalent.com",
     siteName: "ArriveTalent",
     type: "website",
     images: [
@@ -33,13 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ArriveTalent | Building Teams For Scaling Businesses.",
-    description:
-      "Pre-screened, qualified candidates ready to interview for Tampa Bay digital agencies and SaaS teams.",
     images: ["/logos/AT_New_Logo_Trans_BG.png"],
-  },
-  icons: {
-    icon: "/icon.png",
   },
 };
 
