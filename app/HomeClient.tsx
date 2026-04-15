@@ -137,7 +137,7 @@ const HIRING_ACCORDION_ITEMS = [
   },
   {
     id: "finalists",
-    title: "Finalists Only. No Noise",
+    title: "Finalists Only.\nNo Noise",
     preview:
       "The average internal process requires 20 first round interviews per hire...",
     body: "The average internal process requires 20 first round interviews per hire. Which means 25 hours of leadership time per role. We eliminate that. Our AI screening layer filters every candidate against your exact criteria first. Those who pass go through a structured interview with our HR leaders assessing communication, cultural fit, and long-term potential. You only receive the finalists and a one-page brief on each. A few final conversations. One hire.",
@@ -163,7 +163,7 @@ function HiringAccordionCards() {
             key={item.id}
             className="grid grid-cols-[minmax(0,1fr)_2.75rem] gap-x-3 gap-y-3 rounded-lg border border-[#e5e5e7] bg-white p-5 shadow-sm md:gap-x-4 md:p-6"
           >
-            <h4 className="col-start-1 row-start-1 min-w-0 text-base font-bold leading-snug text-[#0f172a] md:text-lg">
+            <h4 className="col-start-1 row-start-1 min-w-0 whitespace-pre-line text-base font-bold leading-snug text-[#0f172a] md:text-lg">
               {item.title}
             </h4>
             <p className="col-start-1 row-start-2 min-w-0 text-sm font-medium leading-relaxed text-[#86868b]">
