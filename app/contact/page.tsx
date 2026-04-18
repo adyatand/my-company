@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -109,15 +110,12 @@ export default function ContactPage() {
                   Your confirmation email is on its way. If you don&apos;t see it
                   in your inbox, please check your Promotions or Spam folder.
                 </p>
-                <a
+                <Link
                   href="/"
-                  className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#1d1d1f] px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#333]"
+                  className="mt-8 inline-flex items-center rounded-full bg-[#1d1d1f] px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#333]"
                 >
                   Back to Home
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </a>
+                </Link>
               </div>
             ) : (
               <form
@@ -222,12 +220,9 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1d1d1f] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#333] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-[#1d1d1f] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#333] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {submitting ? "Submitting..." : "Get in Touch"}
-                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
                   </button>
                   {error && (
                     <p className="mt-3 text-center text-xs font-semibold text-rose-600">
@@ -269,12 +264,9 @@ export default function ContactPage() {
                 href="https://calendly.com/hire-arrivetalent/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#3B82F6] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#2563EB]"
+                className="mt-8 inline-flex w-fit items-center rounded-full bg-[#3B82F6] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#2563EB]"
               >
                 Book a Call
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
               </a>
               <p className="mt-4 text-xs font-medium text-[#86868b]">
                 Usually available within 1–2 business days.

@@ -24,11 +24,11 @@ export function FlowOrbs({ variant }: { variant: FlowOrbsVariant }) {
         <FlowOrb
           zIndex={0}
           style={{
-            width: "min(88vw, 440px)",
-            height: "min(88vw, 440px)",
-            top: "-12%",
-            left: "-18%",
-            backgroundColor: "rgba(59, 130, 246, 0.14)",
+            width: "min(92vw, 480px)",
+            height: "min(92vw, 480px)",
+            top: "-32%",
+            left: "-20%",
+            backgroundColor: "rgba(59, 130, 246, 0.12)",
           }}
         />
         <FlowOrb

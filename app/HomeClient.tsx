@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { FlowOrbs } from "./components/FlowOrbs";
-import PartnerAccordionCards from "./components/PartnerAccordionCards";
 
 function CountUp({
   target,
@@ -212,8 +210,6 @@ function HiringAccordionCards() {
 }
 
 export default function HomeClient() {
-  const partnerSectionClipId = `partner-section-clip-${useId().replace(/:/g, "")}`;
-
   const industryTiles = [
     { label: "Hospitality", file: "Hospitality (1).png" },
     { label: "Sales", file: "Sales (1).png" },
@@ -248,14 +244,15 @@ export default function HomeClient() {
             "polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - clamp(2.75rem, 8vw, 5.5rem)))",
         }}
       >
+        {/* Image + tint as one fixed background so the photo stays put while hero copy scrolls (scroll attach on small screens — iOS) */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 z-0 bg-[#f5f5f7] bg-cover bg-center bg-no-repeat md:bg-fixed"
+          className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed"
           style={{
-            backgroundImage: "url('/images/Hero_Section_BG.png')",
+            backgroundImage:
+              "linear-gradient(rgba(15,23,42,0.55),rgba(15,23,42,0.55)),url('/images/Hero_Section_BG.png')",
           }}
         />
-        <div className="absolute inset-0 z-[2] bg-[#0f172a]/55" />
         <div className="flex flex-1 flex-col items-start justify-center pb-16 md:pb-20">
           <div className="relative z-10 flex w-full flex-col items-start justify-center text-left">
             <h1 className="max-w-3xl font-sans text-5xl font-bold leading-[1.05] tracking-tight text-[#f5f5f7] md:text-6xl lg:text-[4rem]">
@@ -282,8 +279,7 @@ export default function HomeClient() {
       </section>
 
       {/* Why ArriveTalent — pulled up to meet hero diagonal */}
-      <section className="relative -mt-[clamp(2.75rem,8vw,5.5rem)] bg-[#f8f8fa] px-6 pb-16 pt-[calc(3rem+clamp(2.75rem,8vw,5.5rem))] md:px-16 md:pb-20 lg:px-24">
-        <FlowOrbs variant="light" />
+      <section className="relative -mt-[clamp(2.75rem,8vw,5.5rem)] bg-[#f8f8fa] px-6 pb-12 pt-[calc(3rem+clamp(2.75rem,8vw,5.5rem))] md:px-16 md:pb-14 lg:px-24">
         <div className="relative z-10 grid w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col items-start">
             <h3 className="font-sans text-3xl font-bold tracking-tight text-[#1d1d1f] md:text-4xl lg:text-5xl">
@@ -291,20 +287,14 @@ export default function HomeClient() {
             </h3>
             <p className="mt-6 max-w-xl text-base font-medium leading-relaxed text-[#86868b] md:text-lg">
               We combine 20+ years of HR expertise with modern AI-powered tools
-              to serve as your full-service talent acquisition partner. We learn
-              your business, your culture, and what great looks like to you,
-              enabling us to build the recruiting infrastructure your business
-              needs. With us, all you will see is everything you want.
+              to serve as your full-service talent acquisition partner. Our
+              specialized AI stack finds the top-tier talent that never hits the
+              job boards. We go beyond the resume - every candidate passes a
+              logic audit and a deep reliability screen to verify they can
+              actually do the work. This removes the noise so you only interview
+              the finalists. You save time and get the high-performers your
+              business needs to scale.
             </p>
-            <a
-              href="/contact"
-              className="group mt-8 inline-flex items-center gap-2 rounded-none border border-[#1d1d1f] bg-transparent px-8 py-3 text-sm font-semibold tracking-wide text-[#1d1d1f] transition-all duration-300 hover:bg-[#1d1d1f] hover:text-white"
-            >
-              Find Your Talent
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </a>
           </div>
 
           <HiringAccordionCards />
@@ -356,59 +346,43 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* Clip: curved top + bottom on Partner section (mirrors hero scoop); mobile adds padding on heading */}
-      <svg
-        className="pointer-events-none absolute h-px w-px overflow-hidden"
-        aria-hidden
-      >
-        <defs>
-          <clipPath
-            id={partnerSectionClipId}
-            clipPathUnits="objectBoundingBox"
-          >
-            <path d="M0,0.1 Q0.5,0 1,0.1 L1,0.9 Q0.5,1 0,0.9 Z" />
-          </clipPath>
-        </defs>
-      </svg>
-
       <section
         id="how-it-works"
-        className="relative -mt-px overflow-hidden bg-[#0f172a] px-6 pb-24 pt-16 md:px-16 md:pb-28 md:pt-20 lg:px-24 lg:pb-36"
-        style={{
-          clipPath: `url(#${partnerSectionClipId})`,
-          WebkitClipPath: `url(#${partnerSectionClipId})`,
-        }}
+        className="relative bg-[#f8f8fa] px-6 pb-16 pt-8 md:px-16 md:pb-20 md:pt-10 lg:px-24"
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 z-0 bg-[#0f172a] bg-cover bg-center bg-no-repeat md:bg-fixed"
-          style={{
-            backgroundImage: "url('/images/WWO_Section_BG.png')",
-          }}
-        />
-        <div className="absolute inset-0 z-[2] bg-[#0f172a]/55" />
-        <div className="relative z-10 mx-auto w-full max-w-6xl">
-          <h3 className="text-center text-3xl font-bold tracking-tight text-[#f5f5f7] max-md:pt-20 md:text-4xl lg:text-5xl">
-            The Partner You Build Your Team With
-          </h3>
-
-          <div className="mt-16 grid grid-cols-1 items-start gap-10 lg:mt-24 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-            <div className="flex min-w-0 flex-col gap-8">
-              <p className="text-left text-lg font-medium leading-relaxed text-[#f5f5f7]/95 md:text-xl">
-                We integrate directly with your leadership team to manage your
-                end-to-end recruitment lifecycle.
-              </p>
-              <PartnerAccordionCards />
-            </div>
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-[min(100%,20rem)] shrink-0 sm:max-w-[22rem] lg:mx-0 lg:max-w-[24rem] lg:justify-self-end">
-              <Image
-                src="/images/partner.png"
-                alt="Partners working with leadership on recruitment"
-                fill
-                sizes="(max-width: 1024px) 320px, 384px"
-                className="rounded-2xl object-cover object-center shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
-              />
-            </div>
+        <h3 className="relative z-10 mx-auto max-w-4xl text-center font-sans text-3xl font-bold tracking-tight text-[#1d1d1f] md:text-4xl lg:text-5xl">
+          The Partner You Build Your Team With
+        </h3>
+        <div className="relative z-10 mx-auto mt-10 grid w-full max-w-6xl grid-cols-1 gap-8 lg:mt-12 lg:grid-cols-2 lg:gap-x-12 lg:items-start">
+          <div className="relative order-2 w-full lg:order-none lg:col-start-1 lg:row-start-1 lg:self-start">
+            <Image
+              src="/images/partner.png"
+              alt="Partners working with leadership on recruitment"
+              width={1264}
+              height={841}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="h-auto w-full rounded-2xl object-cover shadow-[0_24px_50px_rgba(15,23,42,0.12)]"
+            />
+          </div>
+          <div className="order-1 flex min-w-0 flex-col items-start lg:order-none lg:col-start-2 lg:row-start-1 lg:self-start">
+            <p className="text-base font-medium leading-relaxed text-[#86868b] md:text-lg">
+              We act as an extension of your leadership team to manage your
+              entire hiring process. We start by aligning with your growth goals
+              and culture to define exactly what a top performer looks like for
+              you. Our team takes over the heavy lifting by sourcing passive
+              talent, conducting technical logic audits, and managing all
+              candidate coordination. We protect your time by delivering detailed
+              scorecards and ensuring you only meet with the top 1% of vetted
+              professionals. Our performance-based model means we only win when
+              you do, giving you the results of a dedicated talent department
+              with the flexibility of a partner.
+            </p>
+            <a
+              href="/contact"
+              className="mt-8 inline-flex items-center rounded-none border border-[#1d1d1f] bg-transparent px-8 py-3 text-sm font-semibold tracking-wide text-[#1d1d1f] transition-all duration-300 hover:bg-[#1d1d1f] hover:text-white"
+            >
+              Find Your Talent
+            </a>
           </div>
         </div>
       </section>
@@ -418,7 +392,6 @@ export default function HomeClient() {
         id="industries"
         className="relative -mt-[clamp(0.75rem,3vw,2rem)] overflow-hidden bg-white px-6 pb-14 pt-[calc(0.75rem+3.5rem)] md:px-16 md:pb-20 md:pt-[calc(0.75rem+4rem)] lg:px-24"
       >
-        <FlowOrbs variant="white" />
         <h3 className="relative z-10 text-center text-3xl font-bold tracking-tight text-[#0f172a] md:text-4xl lg:text-5xl">
           Industries We Serve
         </h3>
@@ -486,12 +459,9 @@ export default function HomeClient() {
         <div className="relative z-10 mt-12 flex justify-center md:mt-14">
           <Link
             href="/story"
-            className="group inline-flex items-center gap-2 rounded-none border border-[#1d1d1f] bg-transparent px-8 py-3 text-sm font-semibold tracking-wide text-[#0f172a] transition-all duration-300 hover:bg-[#1d1d1f] hover:text-white"
+            className="inline-flex items-center rounded-none border border-[#1d1d1f] bg-transparent px-8 py-3 text-sm font-semibold tracking-wide text-[#0f172a] transition-all duration-300 hover:bg-[#1d1d1f] hover:text-white"
           >
             Read Our Story
-            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
           </Link>
         </div>
       </section>
@@ -499,9 +469,8 @@ export default function HomeClient() {
       {/* Final CTA — px matches hero + Next Level; grid keeps copy clear of the image */}
       <section
         id="contact"
-        className="relative overflow-hidden bg-white px-6 py-16 md:px-16 lg:grid lg:min-h-[min(580px,80svh)] lg:grid-cols-[minmax(0,36rem)_minmax(0,1fr)] lg:items-center lg:gap-12 lg:py-24 lg:pl-24 lg:pr-0 xl:gap-16"
+        className="relative overflow-hidden bg-white px-6 py-16 md:px-16 lg:grid lg:grid-cols-[minmax(0,36rem)_minmax(0,1fr)] lg:items-center lg:gap-12 lg:py-20 lg:pl-24 lg:pr-0 xl:gap-16"
       >
-        <FlowOrbs variant="cta" />
         <div className="relative z-10 col-start-1 row-start-1 max-w-xl text-left">
           <h3 className="font-sans text-3xl font-bold leading-tight tracking-tight text-[#0f172a] md:text-4xl lg:text-5xl">
             Secure Your Competitive Advantage
@@ -517,17 +486,14 @@ export default function HomeClient() {
 
           <a
             href="/contact"
-            className="group mt-8 inline-flex origin-center items-center gap-2 rounded-none bg-[#1d1d1f] px-8 py-3 text-sm font-semibold tracking-wide text-white transition-transform duration-300 hover:scale-105"
+            className="mt-8 inline-flex origin-center items-center rounded-none bg-[#1d1d1f] px-8 py-3 text-sm font-semibold tracking-wide text-white transition-transform duration-300 hover:scale-105"
           >
             Find Talent
-            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
           </a>
         </div>
 
         <div
-          className="relative z-[2] col-start-2 row-start-1 mt-12 h-[min(70vw,340px)] w-[calc(100%+1.5rem)] max-w-none shrink-0 -mr-6 sm:mt-14 sm:h-[min(64vw,380px)] md:-mr-16 md:w-[calc(100%+4rem)] lg:mr-0 lg:mt-0 lg:h-auto lg:min-h-[min(520px,75svh)] lg:w-full lg:self-stretch"
+          className="relative z-[2] col-start-2 row-start-1 mt-12 h-[min(70vw,340px)] w-[calc(100%+1.5rem)] max-w-none shrink-0 -mr-6 sm:mt-14 sm:h-[min(64vw,380px)] md:-mr-16 md:w-[calc(100%+4rem)] lg:mr-0 lg:mt-0 lg:h-[min(420px,50svh)] lg:w-full lg:self-stretch lg:max-h-[520px]"
         >
           <div className="absolute inset-0 overflow-hidden [clip-path:ellipse(84%_138%_at_90%_50%)] lg:[clip-path:ellipse(82%_135%_at_88%_50%)]">
             <Image
